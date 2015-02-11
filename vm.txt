@@ -1,0 +1,30 @@
+rechercher dans la STL des fonctions de parsing
+
+PARSING
+----------
+parser des lignes en "ASM" => interdiction split & strtotab
+commentaires : ';', pas forcément le premier char
+actions : push, assert, pop, ... --> le fichier doit finir par exit
+lever les exceptions dès le parsing
+utiliser la grammaire & la décortiquer
+
+EXCEPTIONS
+-----------
+lever dès le parsing (gain de temps)
+liste à suivre
+hériter de std::exception de la STL
+toutes les exceptions ne sont pas écrites dans la liste (checker segfault // boucle infinie)
+
+EXECUTION
+-----------
+Fichier ou ligne de commande (fin de ligne de commande : ";;")
+créer un flag pour gérer le ";;" et vérifier le exit le précédant --> CHANGEMENT DE LA GRAMMAIRE
+intégrer interface IOperand pour toutes les classes d'opérandes
+les classes opérandes doivent hériter de l'interface
+L'interface doit TOUJOURS être appelé
+classes opérandes == classes templates
+créer une méthode qui génère des opérandes (cf Starcraft class Hatchery)
+inclure une enum sur la priorité
+std::stack OU std::deque
+
+
