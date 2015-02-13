@@ -13,6 +13,8 @@ class Core {
 	Core() {};
 	~Core() {};
 
+	std::list<IOperand *> getList(void) const;
+
 	void push(IOperand *);
 	void pop(void);
 	void dump(void);

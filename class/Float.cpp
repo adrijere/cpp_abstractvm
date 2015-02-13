@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-12 11:44:45
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 13:20:53
+* @Last Modified time: 2015-02-13 17:44:23
 */
 
 #include "Float.hpp"
@@ -14,7 +14,7 @@ std::string const &Float::toString(void) const {
 }
 
 int Float::getPrecision(void) const {
-	return 0;
+	return PLUS_ACCURATE;
 }
 
 eOperandType Float::getType(void) const {

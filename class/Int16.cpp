@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-12 11:44:09
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 13:17:41
+* @Last Modified time: 2015-02-13 17:44:11
 */
 
 #include "Int16.hpp"
@@ -14,7 +14,7 @@ std::string const &Int16::toString(void) const {
 }
 
 int Int16::getPrecision(void) const {
-	return 0;
+	return MINUS_ACCURATE;
 }
 
 eOperandType Int16::getType(void) const {

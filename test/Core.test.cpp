@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 16:50:21
+* @Last Modified time: 2015-02-13 17:58:39
 */
 
 #include "UnitTests.hpp"
@@ -43,7 +43,11 @@ void testPush(void) {
 	try {
 		core.push(&operand);
 	} catch (const std::exception &error) {
-		printError("PushMethod is catching an exception");
+		printError("Push method is catching an exception");
+	}
+
+	if (UnitTests::isNotEqual(core.getList().back()->toString(), "42")) {
+		printError("Push method is not inserting the right value");
 	}
 }
 
@@ -68,6 +72,10 @@ void testPop(void) {
 
 	if (status == false) {
 		printError("Pop method is not catching an exception as it ought to be");
+	}
+
+	if (UnitTests::isNotEqual((int)secondCore.getList().size(), 0)) {
+		printError("Pop method is not deleting elements in the stack");
 	}
 }
 
@@ -100,11 +108,34 @@ void testAssert(void) {
 
 void testAdd(void) {
 	Core core;
+	Int8 firstOperand("8");
+	Int16 secondOperand("16");
+	bool status = false;
 
 	try {
 		core.add();
 	} catch (const Error &error) {
+		status = true;
+	}
+
+	if (status == false) {
+		printError("Add method is not catching an exception as it ougth to be");
+	}
+
+	core.push(&firstOperand);
+	core.push(&secondOperand);
+	try {
+		core.add();
+	} catch (const Error &error) {
 		printError("Add method is catching an exception");
+	}
+
+	if (UnitTests::isNotEqual((int)core.getList().size(), 1)) {
+		printError("Add method is not deleting elements in the stack after the operation");
+	}
+
+	if (UnitTests::isNotEqual(core.getList().back()->toString(), "24")) {
+		printError("Add method is not adding elements correctly");
 	}
 }
 
@@ -125,7 +156,28 @@ void testMod(void) {
 }
 
 void testPrint(void) {
+	Core core;
+	Int8 firstOperand("42");
+	Int16 secondOperand("42");
+	bool status = false;
 
+	core.push(&firstOperand);
+	try {
+		core.print();
+	} catch (const Error &error) {
+		printError("Print method is catching an exception");
+	}
+	
+	core.push(&secondOperand);
+	try {
+		core.print();
+	} catch (const Error &error) {
+		status = true;	
+	}
+
+	if (status == false) {
+		printError("Print method is not catching an exception as it ought to be");
+	}
 }
 
 void testExit(void) {

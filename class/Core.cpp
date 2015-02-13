@@ -2,11 +2,15 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 16:39:16
+* @Last Modified time: 2015-02-13 17:53:24
 */
 
 #include "Core.hpp"
 #include "Int8.hpp"
+
+std::list<IOperand *> Core::getList(void) const {
+	return this->_list;
+}
 
 void Core::push(IOperand *operand) {
 	this->_list.push_back(operand);
@@ -33,10 +37,15 @@ void Core::assert(const IOperand &operand) {
 }
 
 void Core::add(void) {
-	if (!this->_list.back()) {
+	if (this->_list.size() < 2) {
 		throw Error("Add instruction is not possible unless two elements are present in the stack");
 	} else {
+		// IOperand *firstOperand = this->_list.back();
+		// this->_list.pop_back();
+		// IOperand *secondOperand = this->_list.back();
+		// this->_list.pop_back();
 
+		// this->_list.push_back(firstOperand + secondOperand);
 	}
 }
 

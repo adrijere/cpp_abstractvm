@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-12 11:45:02
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 13:21:06
+* @Last Modified time: 2015-02-13 17:44:29
 */
 
 #include "Double.hpp"
@@ -14,7 +14,7 @@ std::string const &Double::toString(void) const {
 }
 
 int Double::getPrecision(void) const {
-	return 0;
+	return MORE_ACCURATE;
 }
 
 eOperandType Double::getType(void) const {
