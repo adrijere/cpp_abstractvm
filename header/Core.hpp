@@ -10,8 +10,8 @@ class Core {
 	std::list<IOperand *> _list;
 
  public:
-	Core();
-	~Core();
+	Core() {};
+	~Core() {};
 
 	void push(IOperand *);
 	void pop(void);

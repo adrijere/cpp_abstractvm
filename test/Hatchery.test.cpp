@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 12:21:51
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 13:21:33
+* @Last Modified time: 2015-02-13 16:39:02
 */
 
 #include "UnitTests.hpp"
@@ -25,7 +25,7 @@ void testCreateOperand(void) {
 	}
 
 	if (status == true) {
-		printError("createOperand method with Int8 is catched");
+		printError("createOperand method is catching an exception");
 	}
 
 	status = false;
@@ -36,6 +36,6 @@ void testCreateOperand(void) {
 	}
 
 	if (status == true) {
-		printError("createOperand method with Int32 is catched");
+		printError("createOperand method is catching an exception");
 	}
 }

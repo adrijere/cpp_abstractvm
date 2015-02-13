@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 10:18:09
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 13:18:24
+* @Last Modified time: 2015-02-13 16:39:37
 */
 
 #include "Hatchery.hpp"
@@ -19,31 +19,26 @@ IOperand *Hatchery::createOperand(eOperandType type, const std::string &value) {
 	if (this->arrayMethod[type]) {
 		return (this->*arrayMethod[type])(value);
 	} else {
-		throw new Error("OperandType for array to member pointers undefined");
+		throw Error("OperandType for array to member pointers undefined");
 	}
 }
 
 IOperand *Hatchery::createInt8(const std::string &value) {
-	std::cout << "Creation d'un Int8" << std::endl;
 	return new Int8(value);
 }
 
 IOperand *Hatchery::createInt16(const std::string &value) {
-	std::cout << "Creation d'un Int16" << std::endl;
 	return new Int16(value);
 }
 
 IOperand *Hatchery::createInt32(const std::string &value) {
-	std::cout << "Creation d'un Int32" << std::endl;
 	return new Int32(value);
 }
 
 IOperand *Hatchery::createFloat(const std::string &value) {
-	std::cout << "Creation d'un Float" << std::endl;
 	return new Float(value);
 }
 
 IOperand *Hatchery::createDouble(const std::string &value) {
-	std::cout << "Creation d'un Double" << std::endl;
 	return new Double(value);
 }

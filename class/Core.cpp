@@ -2,15 +2,11 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 16:16:17
+* @Last Modified time: 2015-02-13 16:39:16
 */
 
 #include "Core.hpp"
 #include "Int8.hpp"
-
-Core::Core() {}
-
-Core::~Core() {}
 
 void Core::push(IOperand *operand) {
 	this->_list.push_back(operand);
@@ -18,7 +14,7 @@ void Core::push(IOperand *operand) {
 
 void Core::pop(void) {
 	if (this->_list.empty()) {
-		throw new Error("Pop instruction on an empty list");
+		throw Error("Pop instruction on an empty list");
 	} else {
 		this->_list.pop_back();
 	}
@@ -32,12 +28,16 @@ void Core::dump(void) {
 
 void Core::assert(const IOperand &operand) {
 	if (this->_list.empty() or this->_list.back()->getType() != operand.getType()) {
-		throw new Error("Assert with a wrong operand type on the last element");
+		throw Error("Assert with a wrong operand type on the last element");
 	}
 }
 
 void Core::add(void) {
+	if (!this->_list.back()) {
+		throw Error("Add instruction is not possible unless two elements are present in the stack");
+	} else {
 
+	}
 }
 
 void Core::sub(void) {
