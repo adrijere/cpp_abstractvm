@@ -3,27 +3,18 @@
 
 # include <iostream>
 
+# include "Error.hpp"
+
+enum eOperandType {
+	INT8,
+	INT16,
+	INT32,
+	FLOAT,
+	DOUBLE
+};
+
 class IOperand {
- private:
-	// IOperand *(IOperand::*funct)(const std::string &)[5]; // Tableau qui servira de map pour pointeur sur membres.
-
-	IOperand *createInt8(const std::string &);
-	IOperand *createInt16(const std::string &);
-	IOperand *createInt32(const std::string &);
-	IOperand *createFloat(const std::string &);
-	IOperand *createDouble(const std::string &);
-
  public:
-	enum eOperandType {
-		Int8,
-		Int16,
-		Int32,
-		Float,
-		Double
-	};
-
-	IOperand *createOperand(eOperandType, const std::string &);
-
 	virtual std::string const &toString(void) const = 0;
 
 	virtual int getPrecision(void) const = 0;

@@ -8,7 +8,7 @@
 CXX		=	g++
 CXXFLAGS=	-W -Wall -Wextra -I./header/
 RM		=	rm -rf
-NAME	=	abstract-vm
+NAME	=	avm
 T_NAME	=	unit
 
 include		source.mk

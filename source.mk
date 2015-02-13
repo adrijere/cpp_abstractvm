@@ -1,4 +1,6 @@
-C_SRC 	+=		class/Int8.cpp \
+C_SRC 	+=		class/Hatchery.cpp \
+				class/Error.cpp \
+				class/Int8.cpp \
 				class/Int16.cpp \
 				class/Int32.cpp \
 				class/Float.cpp \
@@ -7,7 +9,8 @@ C_SRC 	+=		class/Int8.cpp \
 SRC		+=		source/main.cpp \
 				$(C_SRC)
 
-T_SRC 	+=		test/Int8.test.cpp \
+T_SRC 	+=		test/Hatchery.test.cpp \
+				test/Int8.test.cpp \
 				test/Int16.test.cpp \
 				test/Int32.test.cpp \
 				test/Float.test.cpp \

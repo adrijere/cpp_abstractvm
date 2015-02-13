@@ -1,7 +1,6 @@
-rechercher dans la STL des fonctions de parsing
-
 PARSING
 ----------
+rechercher dans la STL des fonctions de parsing
 parser des lignes en "ASM" => interdiction split & strtotab
 commentaires : ';', pas forcément le premier char
 actions : push, assert, pop, ... --> le fichier doit finir par exit
@@ -26,5 +25,3 @@ classes opérandes == classes templates
 créer une méthode qui génère des opérandes (cf Starcraft class Hatchery)
 inclure une enum sur la priorité
 std::stack OU std::deque
-
-
