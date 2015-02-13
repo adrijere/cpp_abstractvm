@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 16:46:13
+* @Last Modified time: 2015-02-13 16:50:21
 */
 
 #include "UnitTests.hpp"
@@ -39,15 +39,10 @@ void testsCore(void) {
 void testPush(void) {
 	Core core;
 	Int8 operand("42");
-	bool status = false;
 
 	try {
 		core.push(&operand);
 	} catch (const std::exception &error) {
-		status = true;
-	}
-
-	if (status == true) {
 		printError("PushMethod is catching an exception");
 	}
 }
@@ -62,12 +57,7 @@ void testPop(void) {
 	try {
 		firstCore.pop();
 	} catch (const Error &error) {
-		status = true;
-	}
-
-	if (status == true) {
 		printError("Pop method is catching an exception");
-		status = false;
 	}
 
 	try {
@@ -94,12 +84,7 @@ void testAssert(void) {
 	try {
 		core.assert(firstOperand);
 	} catch (const Error &error) {
-		status = true;
-	}
-
-	if (status == true) {
 		printError("Assert method is catching an exception");
-		status = false;
 	}
 
 	try {
@@ -115,15 +100,10 @@ void testAssert(void) {
 
 void testAdd(void) {
 	Core core;
-	bool status = false;
 
 	try {
 		core.add();
 	} catch (const Error &error) {
-		status = true;
-	}
-
-	if (status == true) {
 		printError("Add method is catching an exception");
 	}
 }
