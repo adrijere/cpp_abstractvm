@@ -2,17 +2,17 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 10:18:09
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 12:35:56
+* @Last Modified time: 2015-02-13 13:18:24
 */
 
 #include "Hatchery.hpp"
 
 Hatchery::Hatchery() {
 	this->arrayMethod[INT8] = &Hatchery::createInt8;
-	// this->arrayMethod[INT16] = &Hatchery::createInt16;
-	// this->arrayMethod[INT32] = &Hatchery::createInt32;
-	// this->arrayMethod[FLOAT] = &Hatchery::createFloat;
-	// this->arrayMethod[DOUBLE] = &Hatchery::createDouble;
+	this->arrayMethod[INT16] = &Hatchery::createInt16;
+	this->arrayMethod[INT32] = &Hatchery::createInt32;
+	this->arrayMethod[FLOAT] = &Hatchery::createFloat;
+	this->arrayMethod[DOUBLE] = &Hatchery::createDouble;
 }
 
 IOperand *Hatchery::createOperand(eOperandType type, const std::string &value) {
@@ -28,22 +28,22 @@ IOperand *Hatchery::createInt8(const std::string &value) {
 	return new Int8(value);
 }
 
-// IOperand *Hatchery::createInt16(const std::string &value) {
-//	std::cout << "Creation d'un Int16" << std::endl;
-// 	return new Int16(value);
-// }
+IOperand *Hatchery::createInt16(const std::string &value) {
+	std::cout << "Creation d'un Int16" << std::endl;
+	return new Int16(value);
+}
 
-// IOperand *Hatchery::createInt32(const std::string &value) {
-//	std::cout << "Creation d'un Int32" << std::endl;
-// 	return new Int32(value);
-// }
+IOperand *Hatchery::createInt32(const std::string &value) {
+	std::cout << "Creation d'un Int32" << std::endl;
+	return new Int32(value);
+}
 
-// IOperand *Hatchery::createFloat(const std::string &value) {
-//	std::cout << "Creation d'un Float" << std::endl;
-// 	return new Float(value);
-// }
+IOperand *Hatchery::createFloat(const std::string &value) {
+	std::cout << "Creation d'un Float" << std::endl;
+	return new Float(value);
+}
 
-// IOperand *Hatchery::createDouble(const std::string &value) {
-//	std::cout << "Creation d'un Double" << std::endl;
-// 	return new Double(value);
-// }
+IOperand *Hatchery::createDouble(const std::string &value) {
+	std::cout << "Creation d'un Double" << std::endl;
+	return new Double(value);
+}

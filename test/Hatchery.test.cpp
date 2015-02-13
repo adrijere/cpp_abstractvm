@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 12:21:51
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 12:45:11
+* @Last Modified time: 2015-02-13 13:21:33
 */
 
 #include "UnitTests.hpp"
@@ -28,14 +28,14 @@ void testCreateOperand(void) {
 		printError("createOperand method with Int8 is catched");
 	}
 
-	// status = false;
-	// try {
-	// 	hatchery.createOperand(INT32, "Kafei");
-	// } catch (const Error &error) {
-	// 	status = true;
-	// }
+	status = false;
+	try {
+		hatchery.createOperand(INT32, "Kafei");
+	} catch (const Error &error) {
+		status = true;
+	}
 
-	// if (status == true) {
-	// 	printError("createOperand method with Int32 is catched");
-	// }
+	if (status == true) {
+		printError("createOperand method with Int32 is catched");
+	}
 }

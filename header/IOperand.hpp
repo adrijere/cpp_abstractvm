@@ -2,7 +2,6 @@
 # define IOPERAND_HPP_
 
 # include <iostream>
-
 # include "Error.hpp"
 
 enum eOperandType {

@@ -12,7 +12,7 @@
 class Hatchery {
 
  private:
-	IOperand *(Hatchery::*arrayMethod[5])(const std::string &); // Tableau qui servira de map pour pointeur sur membres.
+	IOperand *(Hatchery::*arrayMethod[5])(const std::string &);
 
 	IOperand *createInt8(const std::string &);
 	IOperand *createInt16(const std::string &);

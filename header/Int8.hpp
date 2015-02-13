@@ -7,10 +7,10 @@ class Int8 : public IOperand {
 	std::string _value;
 
  public:
- 	Int8(const std::string &);
+	Int8(const std::string &);
 	~Int8() {}
 
- 	std::string const &toString(void) const;
+	std::string const &toString(void) const;
 
 	int getPrecision(void) const;
 	eOperandType getType(void) const;
