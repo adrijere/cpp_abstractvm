@@ -4,8 +4,8 @@
 # include "IOperand.hpp"
 
 class Int16 : public IOperand {
-	std::string _value;
-
+	int16_t _value;
+	std::string _stringValue;
  public:
 	Int16(const std::string &);
 	~Int16() {}

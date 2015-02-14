@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 17:53:24
+* @Last Modified time: 2015-02-14 19:11:43
 */
 
 #include "Core.hpp"
@@ -40,29 +40,73 @@ void Core::add(void) {
 	if (this->_list.size() < 2) {
 		throw Error("Add instruction is not possible unless two elements are present in the stack");
 	} else {
-		// IOperand *firstOperand = this->_list.back();
-		// this->_list.pop_back();
-		// IOperand *secondOperand = this->_list.back();
-		// this->_list.pop_back();
+		IOperand *firstOperand = this->_list.back();
+		this->_list.pop_back();
+		IOperand *secondOperand = this->_list.back();
+		this->_list.pop_back();
 
-		// this->_list.push_back(firstOperand + secondOperand);
+		this->_list.push_back(*firstOperand + *secondOperand);
 	}
 }
 
 void Core::sub(void) {
+	if (this->_list.size() < 2) {
+		throw Error("Add instruction is not possible unless two elements are present in the stack");
+	} else {
+		IOperand *firstOperand = this->_list.back();
+		this->_list.pop_back();
+		IOperand *secondOperand = this->_list.back();
+		this->_list.pop_back();
 
+		this->_list.push_back(*firstOperand - *secondOperand);
+	}
 }
 
 void Core::mul(void) {
+	if (this->_list.size() < 2) {
+		throw Error("Add instruction is not possible unless two elements are present in the stack");
+	} else {
+		IOperand *firstOperand = this->_list.back();
+		this->_list.pop_back();
+		IOperand *secondOperand = this->_list.back();
+		this->_list.pop_back();
 
+		this->_list.push_back(*firstOperand * (*secondOperand));
+	}
 }
 
 void Core::div(void) {
+	if (this->_list.size() < 2) {
+		throw Error("Add instruction is not possible unless two elements are present in the stack");
+	} else {
+		IOperand *firstOperand = this->_list.back();
+		this->_list.pop_back();
+		IOperand *secondOperand = this->_list.back();
+		this->_list.pop_back();
 
+		if (secondOperand->toString() == "0") {
+			throw Error("Div instruction is trying to divide by zero");
+		} else {
+			this->_list.push_back(*firstOperand / *secondOperand);		
+		}
+	}
 }
 
 void Core::mod(void) {
+	if (this->_list.size() < 2) {
+		throw Error("Add instruction is not possible unless two elements are present in the stack");
+	} else {
+		IOperand *firstOperand = this->_list.back();
+		this->_list.pop_back();
+		IOperand *secondOperand = this->_list.back();
+		this->_list.pop_back();
 
+		if (secondOperand->toString() == "0") {
+			throw Error("Mod instruction is trying to divide by zero");
+		} else {
+			this->_list.push_back(*firstOperand % *secondOperand);		
+		}
+	}
 }
 
 void Core::print(void) {

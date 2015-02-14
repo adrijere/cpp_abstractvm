@@ -2,6 +2,7 @@
 # define IOPERAND_HPP_
 
 # include <iostream>
+# include <sstream>
 # include <cstdlib>
 # include "Error.hpp"
 
@@ -14,11 +15,11 @@ enum eOperandType {
 };
 
 enum eOperandPrecision {
-	LESS_ACCURATE,
-	MINUS_ACCURATE,
-	ACCURATE,
-	PLUS_ACCURATE,
-	MORE_ACCURATE
+	LESS_ACCURATE = 0,
+	MINUS_ACCURATE = 1,
+	ACCURATE = 2,
+	PLUS_ACCURATE = 3,
+	MORE_ACCURATE = 4
 };
 
 class IOperand {

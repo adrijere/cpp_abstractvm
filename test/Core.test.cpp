@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 17:58:39
+* @Last Modified time: 2015-02-14 19:15:04
 */
 
 #include "UnitTests.hpp"
@@ -140,11 +140,69 @@ void testAdd(void) {
 }
 
 void testSub(void) {
+	Core core;
+	Int8 firstOperand("8");
+	Int16 secondOperand("16");
+	bool status = false;
 
+	try {
+		core.sub();
+	} catch (const Error &error) {
+		status = true;
+	}
+
+	if (status == false) {
+		printError("Sub method is not catching an exception as it ougth to be");
+	}
+
+	core.push(&firstOperand);
+	core.push(&secondOperand);
+	try {
+		core.sub();
+	} catch (const Error &error) {
+		printError("Sub method is catching an exception");
+	}
+
+	if (UnitTests::isNotEqual((int)core.getList().size(), 1)) {
+		printError("Sub method is not deleting elements in the stack after the operation");
+	}
+
+	if (UnitTests::isNotEqual(core.getList().back()->toString(), "8")) {
+		printError("Sub method is not substribing elements correctly");
+	}
 }
 
 void testMul(void) {
+	Core core;
+	Int8 firstOperand("8");
+	Int16 secondOperand("16");
+	bool status = false;
 
+	try {
+		core.mul();
+	} catch (const Error &error) {
+		status = true;
+	}
+
+	if (status == false) {
+		printError("Mul method is not catching an exception as it ougth to be");
+	}
+
+	core.push(&firstOperand);
+	core.push(&secondOperand);
+	try {
+		core.mul();
+	} catch (const Error &error) {
+		printError("Mul method is catching an exception");
+	}
+
+	if (UnitTests::isNotEqual((int)core.getList().size(), 1)) {
+		printError("Mul method is not deleting elements in the stack after the operation");
+	}
+
+	if (UnitTests::isNotEqual(core.getList().back()->toString(), "128")) {
+		printError("Mul method is not multiplying elements correctly");
+	}
 }
 
 void testDiv(void) {
