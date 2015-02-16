@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-12 11:43:48
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-14 19:13:40
+* @Last Modified time: 2015-02-16 09:53:12
 */
 
 #include "Int8.hpp"
@@ -31,11 +31,14 @@ IOperand *Int8::operator+(const IOperand &rhs) const {
 
 	std::ostringstream stream;
 	stream << atoi(this->toString().c_str()) + atoi(rhs.toString().c_str());
-
-	if (this->getType() <= rhs.getType()) {
-		operand = hatchery.createOperand(rhs.getType(), stream.str());
+	if (atoi(this->toString().c_str()) + atoi(rhs.toString().c_str()) < 2) {
+		throw Error("Trying to push a result lower than 2");
 	} else {
-		operand = hatchery.createOperand(this->getType(), stream.str());
+		if (this->getType() <= rhs.getType()) {
+			operand = hatchery.createOperand(rhs.getType(), stream.str());
+		} else {
+			operand = hatchery.createOperand(this->getType(), stream.str());
+		}
 	}
 
 	return operand;
@@ -47,11 +50,14 @@ IOperand *Int8::operator-(const IOperand &rhs) const {
 
 	std::ostringstream stream;
 	stream << atoi(this->toString().c_str()) - atoi(rhs.toString().c_str());
-
-	if (this->getType() <= rhs.getType()) {
-		operand = hatchery.createOperand(rhs.getType(), stream.str());
+	if (atoi(this->toString().c_str()) - atoi(rhs.toString().c_str()) < 2) {
+		throw Error("Trying to push a result lower than 2");
 	} else {
-		operand = hatchery.createOperand(this->getType(), stream.str());
+		if (this->getType() <= rhs.getType()) {
+			operand = hatchery.createOperand(rhs.getType(), stream.str());
+		} else {
+			operand = hatchery.createOperand(this->getType(), stream.str());
+		}
 	}
 
 	return operand;
@@ -63,11 +69,14 @@ IOperand *Int8::operator*(const IOperand &rhs) const {
 
 	std::ostringstream stream;
 	stream << atoi(this->toString().c_str()) * atoi(rhs.toString().c_str());
-
-	if (this->getType() <= rhs.getType()) {
-		operand = hatchery.createOperand(rhs.getType(), stream.str());
+	if (atoi(this->toString().c_str()) * atoi(rhs.toString().c_str()) < 2) {
+		throw Error("Trying to push a result lower than 2");
 	} else {
-		operand = hatchery.createOperand(this->getType(), stream.str());
+		if (this->getType() <= rhs.getType()) {
+			operand = hatchery.createOperand(rhs.getType(), stream.str());
+		} else {
+			operand = hatchery.createOperand(this->getType(), stream.str());
+		}
 	}
 
 	return operand;

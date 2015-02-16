@@ -2,18 +2,19 @@
 # define CORE_HPP_
 
 # include <iostream>
-# include <list>
+# include <stack>
+
 # include "Error.hpp"
 # include "IOperand.hpp"
 
 class Core {
-	std::list<IOperand *> _list;
+	std::stack<IOperand *> _stack;
 
  public:
 	Core() {};
 	~Core() {};
 
-	std::list<IOperand *> getList(void) const;
+	std::stack<IOperand *> getStack(void) const;
 
 	void push(IOperand *);
 	void pop(void);
