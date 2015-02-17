@@ -4,7 +4,6 @@
 # include <iostream>
 # include <sstream>
 # include <cstdlib>
-# include "Error.hpp"
 
 enum eOperandType {
 	INT8,

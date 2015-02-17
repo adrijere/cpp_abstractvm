@@ -2,13 +2,7 @@
 # define HATCHERY_HPP_
 
 # include "Error.hpp"
-# include "Operand.hpp"
-
-// # include "Int8.hpp"
-// # include "Int16.hpp"
-// # include "Int32.hpp"
-// # include "Float.hpp"
-// # include "Double.hpp"
+# include "IOperand.hpp"
 
 class Hatchery {
 
@@ -27,5 +21,7 @@ class Hatchery {
 
 	IOperand *createOperand(eOperandType, const std::string &);
 };
+
+# include "Operand.hpp"
 
 #endif /* !HATCHERY_HPP_ */
