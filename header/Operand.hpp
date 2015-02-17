@@ -4,13 +4,13 @@
 # include "IOperand.hpp"
 
 template <typename T>
-class Operand {
+class Operand : public IOperand {
 	T _value;
 	eOperandType _type;
 	eOperandPrecision _precision;
 
  public:
-	Operand(eOperandType, const T);
+	Operand(const T, eOperandType, eOperandPrecision);
 	~Operand() {}
 
 	std::string const &toString(void) const;

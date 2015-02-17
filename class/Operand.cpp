@@ -2,14 +2,14 @@
 * @Author: gicque_p
 * @Date:   2015-02-17 17:00:20
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-17 17:09:09
+* @Last Modified time: 2015-02-17 18:50:02
 */
 
+// #include "Operand.hpp"
 #include "Hatchery.hpp"
-#include "Operand.hpp"
 
 template<typename T>
-Operand<T>::Operand(eOperandType type, const T value) : _type(type), _value(value) {}
+Operand<T>::Operand(const T value, eOperandType type, eOperandPrecision precision) : _value(value), _type(type), _precision(precision) {}
 
 template<typename T>
 std::string const &Operand<T>::toString(void) const {

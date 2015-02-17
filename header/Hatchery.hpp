@@ -2,12 +2,13 @@
 # define HATCHERY_HPP_
 
 # include "Error.hpp"
+# include "Operand.hpp"
 
-# include "Int8.hpp"
-# include "Int16.hpp"
-# include "Int32.hpp"
-# include "Float.hpp"
-# include "Double.hpp"
+// # include "Int8.hpp"
+// # include "Int16.hpp"
+// # include "Int32.hpp"
+// # include "Float.hpp"
+// # include "Double.hpp"
 
 class Hatchery {
 

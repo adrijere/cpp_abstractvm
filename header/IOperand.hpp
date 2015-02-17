@@ -15,11 +15,11 @@ enum eOperandType {
 };
 
 enum eOperandPrecision {
-	LESS_ACCURATE = 0,
-	MINUS_ACCURATE = 1,
-	ACCURATE = 2,
-	PLUS_ACCURATE = 3,
-	MORE_ACCURATE = 4
+	LESS_ACCURATE = -2,
+	MINUS_ACCURATE = -1,
+	ACCURATE = 0,
+	PLUS_ACCURATE = 1,
+	MORE_ACCURATE = 2
 };
 
 class IOperand {
