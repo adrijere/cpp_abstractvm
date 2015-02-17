@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-17 20:19:18
+* @Last Modified time: 2015-02-17 20:49:58
 */
 
 #include "UnitTests.hpp"
@@ -38,15 +38,37 @@ void testsCore(void) {
 void testPush(void) {
 	Core core;
 	Hatchery hatchery;
-	IOperand *operand = hatchery.createOperand(INT8, "8");
+	IOperand *firstOperand = hatchery.createOperand(INT8, "8");
+	IOperand *secondOperand = hatchery.createOperand(DOUBLE, "42.85");
+	IOperand *thirdOperand = hatchery.createOperand(INT16, "42.52");
 
 	try {
-		core.push(operand);
+		core.push(firstOperand);
 	} catch (const std::exception &error) {
 		printError("Push method is catching an exception");
 	}
 
 	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "8")) {
+		printError("Push method is not inserting the right value");
+	}
+
+	try {
+		core.push(secondOperand);
+	} catch (const std::exception &error) {
+		printError("Push method is catching an exception");
+	}
+
+	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "42.85")) {
+		printError("Push method is not inserting the right value");
+	}
+
+	try {
+		core.push(thirdOperand);
+	} catch (const std::exception &error) {
+		printError("Push method is catching an exception");
+	}
+
+	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "42")) {
 		printError("Push method is not inserting the right value");
 	}
 }

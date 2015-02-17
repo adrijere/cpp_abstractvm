@@ -34,15 +34,24 @@ class Operand : public IOperand {
 		Hatchery hatchery;
 		IOperand *operand;
 
-		std::ostringstream stream;
-		stream << atoi(this->toString().c_str()) + atoi(rhs.toString().c_str());
-		if (atoi(this->toString().c_str()) + atoi(rhs.toString().c_str()) < 2) {
+		std::istringstream firstBuffer(this->toString());
+		std::istringstream secondBuffer(rhs.toString());
+		std::ostringstream thirdBuffer;
+
+		double firstValue;
+		double secondValue;
+
+		firstBuffer >> firstValue;
+		secondBuffer >> secondValue;
+		thirdBuffer << firstValue + secondValue;
+
+		if (firstValue + secondValue < 2) {
 			throw Error("Trying to push a result lower than 2");
 		} else {
-			if (this->getType() <= rhs.getType()) {
-				operand = hatchery.createOperand(rhs.getType(), stream.str());
+			if (this->getPrecision() <= rhs.getPrecision()) {
+				operand = hatchery.createOperand(rhs.getType(), thirdBuffer.str());
 			} else {
-				operand = hatchery.createOperand(this->getType(), stream.str());
+				operand = hatchery.createOperand(this->getType(), thirdBuffer.str());
 			}
 		}
 
@@ -53,15 +62,24 @@ class Operand : public IOperand {
 		Hatchery hatchery;
 		IOperand *operand;
 
-		std::ostringstream stream;
-		stream << atoi(this->toString().c_str()) - atoi(rhs.toString().c_str());
-		if (atoi(this->toString().c_str()) - atoi(rhs.toString().c_str()) < 2) {
+		std::istringstream firstBuffer(this->toString());
+		std::istringstream secondBuffer(rhs.toString());
+		std::ostringstream thirdBuffer;
+
+		double firstValue;
+		double secondValue;
+
+		firstBuffer >> firstValue;
+		secondBuffer >> secondValue;
+		thirdBuffer << firstValue - secondValue;
+
+		if (firstValue - secondValue < 2) {
 			throw Error("Trying to push a result lower than 2");
 		} else {
-			if (this->getType() <= rhs.getType()) {
-				operand = hatchery.createOperand(rhs.getType(), stream.str());
+			if (this->getPrecision() <= rhs.getPrecision()) {
+				operand = hatchery.createOperand(rhs.getType(), thirdBuffer.str());
 			} else {
-				operand = hatchery.createOperand(this->getType(), stream.str());
+				operand = hatchery.createOperand(this->getType(), thirdBuffer.str());
 			}
 		}
 
@@ -72,15 +90,24 @@ class Operand : public IOperand {
 		Hatchery hatchery;
 		IOperand *operand;
 
-		std::ostringstream stream;
-		stream << atoi(this->toString().c_str()) * atoi(rhs.toString().c_str());
-		if (atoi(this->toString().c_str()) * atoi(rhs.toString().c_str()) < 2) {
+		std::istringstream firstBuffer(this->toString());
+		std::istringstream secondBuffer(rhs.toString());
+		std::ostringstream thirdBuffer;
+
+		double firstValue;
+		double secondValue;
+
+		firstBuffer >> firstValue;
+		secondBuffer >> secondValue;
+		thirdBuffer << firstValue * secondValue;
+
+		if (firstValue * secondValue < 2) {
 			throw Error("Trying to push a result lower than 2");
 		} else {
-			if (this->getType() <= rhs.getType()) {
-				operand = hatchery.createOperand(rhs.getType(), stream.str());
+			if (this->getPrecision() <= rhs.getPrecision()) {
+				operand = hatchery.createOperand(rhs.getType(), thirdBuffer.str());
 			} else {
-				operand = hatchery.createOperand(this->getType(), stream.str());
+				operand = hatchery.createOperand(this->getType(), thirdBuffer.str());
 			}
 		}
 
@@ -91,15 +118,24 @@ class Operand : public IOperand {
 		Hatchery hatchery;
 		IOperand *operand;
 
-		std::ostringstream stream;
-		stream << atoi(this->toString().c_str()) / atoi(rhs.toString().c_str());
-		if (atoi(this->toString().c_str()) / atoi(rhs.toString().c_str()) < 2) {
+		std::istringstream firstBuffer(this->toString());
+		std::istringstream secondBuffer(rhs.toString());
+		std::ostringstream thirdBuffer;
+
+		double firstValue;
+		double secondValue;
+
+		firstBuffer >> firstValue;
+		secondBuffer >> secondValue;
+		thirdBuffer << firstValue / secondValue;
+
+		if (firstValue / secondValue < 2) {
 			throw Error("Trying to push a result lower than 2");
 		} else {
-			if (this->getType() <= rhs.getType()) {
-				operand = hatchery.createOperand(rhs.getType(), stream.str());
+			if (this->getPrecision() <= rhs.getPrecision()) {
+				operand = hatchery.createOperand(rhs.getType(), thirdBuffer.str());
 			} else {
-				operand = hatchery.createOperand(this->getType(), stream.str());
+				operand = hatchery.createOperand(this->getType(), thirdBuffer.str());
 			}
 		}
 
@@ -110,21 +146,29 @@ class Operand : public IOperand {
 		Hatchery hatchery;
 		IOperand *operand;
 
-		std::ostringstream stream;
-		stream << atoi(this->toString().c_str()) % atoi(rhs.toString().c_str());
-		if (atoi(this->toString().c_str()) % atoi(rhs.toString().c_str()) < 2) {
+		std::istringstream firstBuffer(this->toString());
+		std::istringstream secondBuffer(rhs.toString());
+		std::ostringstream thirdBuffer;
+
+		int firstValue;
+		int secondValue;
+
+		firstBuffer >> firstValue;
+		secondBuffer >> secondValue;
+		thirdBuffer << firstValue % secondValue;
+
+		if (firstValue % secondValue < 2) {
 			throw Error("Trying to push a result lower than 2");
 		} else {
-			if (this->getType() <= rhs.getType()) {
-				operand = hatchery.createOperand(rhs.getType(), stream.str());
+			if (this->getPrecision() <= rhs.getPrecision()) {
+				operand = hatchery.createOperand(rhs.getType(), thirdBuffer.str());
 			} else {
-				operand = hatchery.createOperand(this->getType(), stream.str());
+				operand = hatchery.createOperand(this->getType(), thirdBuffer.str());
 			}
 		}
 
 		return operand;
 	}
-
 };
 
 #endif /* OPERAND_HPP_ */
