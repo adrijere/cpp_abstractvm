@@ -1,6 +1,7 @@
 C_SRC 	+=		class/Core.cpp \
 				class/Hatchery.cpp \
 				class/Error.cpp \
+				class/Operand.cpp \
 				class/Int8.cpp \
 				class/Int16.cpp \
 				class/Int32.cpp \
