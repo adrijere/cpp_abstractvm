@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-17 20:14:24
+* @Last Modified time: 2015-02-17 20:51:53
 */
 
 #include "Core.hpp"
@@ -139,7 +139,7 @@ void Core::mod(void) {
 
 void Core::print(void) {
 	Hatchery hatchery;
-	IOperand *operand = hatchery.createOperand(INT8, ""); 
+	IOperand *operand = hatchery.createOperand(Int8, ""); 
 
 	this->assert(*operand);
 }

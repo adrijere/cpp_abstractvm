@@ -2,17 +2,17 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 10:18:09
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-17 19:47:42
+* @Last Modified time: 2015-02-17 20:52:00
 */
 
 #include "Hatchery.hpp"
 
 Hatchery::Hatchery() {
-	this->arrayMethod[INT8] = &Hatchery::createInt8;
-	this->arrayMethod[INT16] = &Hatchery::createInt16;
-	this->arrayMethod[INT32] = &Hatchery::createInt32;
-	this->arrayMethod[FLOAT] = &Hatchery::createFloat;
-	this->arrayMethod[DOUBLE] = &Hatchery::createDouble;
+	this->arrayMethod[Int8] = &Hatchery::createInt8;
+	this->arrayMethod[Int16] = &Hatchery::createInt16;
+	this->arrayMethod[Int32] = &Hatchery::createInt32;
+	this->arrayMethod[Float] = &Hatchery::createFloat;
+	this->arrayMethod[Double] = &Hatchery::createDouble;
 }
 
 IOperand *Hatchery::createOperand(eOperandType type, const std::string &value) {
@@ -28,7 +28,7 @@ IOperand *Hatchery::createInt8(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	return new Operand<int8_t>(convertedValue, INT8, LESS_ACCURATE);
+	return new Operand<int8_t>(convertedValue, Int8, LESS_ACCURATE);
 }
 
 IOperand *Hatchery::createInt16(const std::string &value) {
@@ -36,7 +36,7 @@ IOperand *Hatchery::createInt16(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	return new Operand<int16_t>(convertedValue, INT16, MINUS_ACCURATE);
+	return new Operand<int16_t>(convertedValue, Int16, MINUS_ACCURATE);
 }
 
 IOperand *Hatchery::createInt32(const std::string &value) {
@@ -44,7 +44,7 @@ IOperand *Hatchery::createInt32(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	return new Operand<int32_t>(convertedValue, INT32, ACCURATE);
+	return new Operand<int32_t>(convertedValue, Int32, ACCURATE);
 }
 
 IOperand *Hatchery::createFloat(const std::string &value) {
@@ -52,7 +52,7 @@ IOperand *Hatchery::createFloat(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	return new Operand<float>(convertedValue, FLOAT, PLUS_ACCURATE);
+	return new Operand<float>(convertedValue, Float, PLUS_ACCURATE);
 }
 
 IOperand *Hatchery::createDouble(const std::string &value) {
@@ -60,5 +60,5 @@ IOperand *Hatchery::createDouble(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	return new Operand<double>(convertedValue, DOUBLE, MORE_ACCURATE);
+	return new Operand<double>(convertedValue, Double, MORE_ACCURATE);
 }

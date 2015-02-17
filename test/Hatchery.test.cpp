@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 12:21:51
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-13 16:50:12
+* @Last Modified time: 2015-02-17 20:53:07
 */
 
 #include "UnitTests.hpp"
@@ -18,13 +18,13 @@ void testCreateOperand(void) {
 	Hatchery hatchery;
 
 	try {
-		hatchery.createOperand(INT8, "Kafei");
+		hatchery.createOperand(Int8, "Kafei");
 	} catch (const Error &error) {
 		printError("createOperand method is catching an exception");
 	}
 
 	try {
-		hatchery.createOperand(INT32, "Kafei");
+		hatchery.createOperand(Int32, "Kafei");
 	} catch (const Error &error) {
 		printError("createOperand method is catching an exception");
 	}

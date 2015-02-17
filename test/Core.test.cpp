@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-17 20:49:58
+* @Last Modified time: 2015-02-17 20:52:35
 */
 
 #include "UnitTests.hpp"
@@ -38,9 +38,9 @@ void testsCore(void) {
 void testPush(void) {
 	Core core;
 	Hatchery hatchery;
-	IOperand *firstOperand = hatchery.createOperand(INT8, "8");
-	IOperand *secondOperand = hatchery.createOperand(DOUBLE, "42.85");
-	IOperand *thirdOperand = hatchery.createOperand(INT16, "42.52");
+	IOperand *firstOperand = hatchery.createOperand(Int8, "8");
+	IOperand *secondOperand = hatchery.createOperand(Double, "42.85");
+	IOperand *thirdOperand = hatchery.createOperand(Int16, "42.52");
 
 	try {
 		core.push(firstOperand);
@@ -77,7 +77,7 @@ void testPop(void) {
 	Core firstCore;
 	Core secondCore;
 	Hatchery hatchery;
-	IOperand *operand = hatchery.createOperand(INT8, "42");
+	IOperand *operand = hatchery.createOperand(Int8, "42");
 	bool status = false;
 
 	firstCore.push(operand);
@@ -109,8 +109,8 @@ void testDump(void) {
 void testAssert(void) {
 	Core core;
 	Hatchery hatchery;
-	IOperand *firstOperand = hatchery.createOperand(INT8, "42");
-	IOperand *secondOperand = hatchery.createOperand(INT16, "42");
+	IOperand *firstOperand = hatchery.createOperand(Int8, "42");
+	IOperand *secondOperand = hatchery.createOperand(Int16, "42");
 	bool status = false;
 
 	core.push(firstOperand);
@@ -135,9 +135,9 @@ void testAssert(void) {
 void testAdd(void) {
 	Core core;
 	Hatchery hatchery;
-	IOperand *firstOperand = hatchery.createOperand(INT8, "8");
-	IOperand *secondOperand = hatchery.createOperand(INT16,"16");
-	IOperand *thirdOperand = hatchery.createOperand(INT32,"-24");
+	IOperand *firstOperand = hatchery.createOperand(Int8, "8");
+	IOperand *secondOperand = hatchery.createOperand(Int16,"16");
+	IOperand *thirdOperand = hatchery.createOperand(Int32,"-24");
 	bool status = false;
 
 	try {
@@ -183,9 +183,9 @@ void testAdd(void) {
 void testSub(void) {
 	Core core;
 	Hatchery hatchery;
-	IOperand *firstOperand = hatchery.createOperand(INT8, "8");
-	IOperand *secondOperand = hatchery.createOperand(INT16, "16");
-	IOperand *thirdOperand = hatchery.createOperand(INT32, "8");
+	IOperand *firstOperand = hatchery.createOperand(Int8, "8");
+	IOperand *secondOperand = hatchery.createOperand(Int16, "16");
+	IOperand *thirdOperand = hatchery.createOperand(Int32, "8");
 	bool status = false;
 
 	try {
@@ -231,9 +231,9 @@ void testSub(void) {
 void testMul(void) {
 	Core core;
 	Hatchery hatchery;
-	IOperand *firstOperand = hatchery.createOperand(INT8, "8");
-	IOperand *secondOperand = hatchery.createOperand(INT16,"16");
-	IOperand *thirdOperand = hatchery.createOperand(INT32,"-1");
+	IOperand *firstOperand = hatchery.createOperand(Int8, "8");
+	IOperand *secondOperand = hatchery.createOperand(Int16,"16");
+	IOperand *thirdOperand = hatchery.createOperand(Int32,"-1");
 	bool status = false;
 
 	try {
@@ -279,9 +279,9 @@ void testMul(void) {
 void testDiv(void) {
 	Core core;
 	Hatchery hatchery;
-	IOperand *firstOperand = hatchery.createOperand(INT8, "8");
-	IOperand *secondOperand = hatchery.createOperand(INT16,"16");
-	IOperand *thirdOperand = hatchery.createOperand(INT32,"0");
+	IOperand *firstOperand = hatchery.createOperand(Int8, "8");
+	IOperand *secondOperand = hatchery.createOperand(Int16,"16");
+	IOperand *thirdOperand = hatchery.createOperand(Int32,"0");
 	bool status = false;
 
 	try {
@@ -340,8 +340,8 @@ void testDiv(void) {
 void testMod(void) {
 	Core core;
 	Hatchery hatchery;
-	IOperand *firstOperand = hatchery.createOperand(INT8, "8");
-	IOperand *secondOperand = hatchery.createOperand(INT16, "15");
+	IOperand *firstOperand = hatchery.createOperand(Int8, "8");
+	IOperand *secondOperand = hatchery.createOperand(Int16, "15");
 	bool status = false;
 
 	try {
@@ -387,8 +387,8 @@ void testMod(void) {
 void testPrint(void) {
 	Core core;
 	Hatchery hatchery;
-	IOperand *firstOperand = hatchery.createOperand(INT8, "42");
-	IOperand *secondOperand = hatchery.createOperand(INT16,"42");
+	IOperand *firstOperand = hatchery.createOperand(Int8, "42");
+	IOperand *secondOperand = hatchery.createOperand(Int16,"42");
 	bool status = false;
 
 	core.push(firstOperand);

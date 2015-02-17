@@ -6,11 +6,11 @@
 # include <cstdlib>
 
 enum eOperandType {
-	INT8,
-	INT16,
-	INT32,
-	FLOAT,
-	DOUBLE
+	Int8,
+	Int16,
+	Int32,
+	Float,
+	Double
 };
 
 enum eOperandPrecision {
