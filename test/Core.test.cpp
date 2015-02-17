@@ -2,16 +2,12 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-16 10:30:07
+* @Last Modified time: 2015-02-17 20:19:18
 */
 
 #include "UnitTests.hpp"
 #include "Core.hpp"
-#include "Int8.hpp"
-#include "Int16.hpp"
-#include "Int32.hpp"
-#include "Float.hpp"
-#include "Double.hpp"
+#include "Hatchery.hpp"
 
 void testPush(void);
 void testPop(void);
@@ -41,15 +37,16 @@ void testsCore(void) {
 
 void testPush(void) {
 	Core core;
-	Int8 operand("42");
+	Hatchery hatchery;
+	IOperand *operand = hatchery.createOperand(INT8, "8");
 
 	try {
-		core.push(&operand);
+		core.push(operand);
 	} catch (const std::exception &error) {
 		printError("Push method is catching an exception");
 	}
 
-	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "42")) {
+	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "8")) {
 		printError("Push method is not inserting the right value");
 	}
 }
@@ -57,10 +54,11 @@ void testPush(void) {
 void testPop(void) {
 	Core firstCore;
 	Core secondCore;
-	Int8 operand("42");
+	Hatchery hatchery;
+	IOperand *operand = hatchery.createOperand(INT8, "42");
 	bool status = false;
 
-	firstCore.push(&operand);
+	firstCore.push(operand);
 	try {
 		firstCore.pop();
 	} catch (const Error &error) {
@@ -88,20 +86,21 @@ void testDump(void) {
 
 void testAssert(void) {
 	Core core;
-	Int8 firstOperand("42");
-	Int16 secondOperand("42");
+	Hatchery hatchery;
+	IOperand *firstOperand = hatchery.createOperand(INT8, "42");
+	IOperand *secondOperand = hatchery.createOperand(INT16, "42");
 	bool status = false;
 
-	core.push(&firstOperand);
+	core.push(firstOperand);
 	try {
-		core.assert(firstOperand);
+		core.assert(*firstOperand);
 	} catch (const Error &error) {
 		printError("Assert method is catching an exception");
 	}
 
 	status = false;
 	try {
-		core.assert(secondOperand);
+		core.assert(*secondOperand);
 	} catch (const Error &error) {
 		status = true;
 	}
@@ -113,9 +112,10 @@ void testAssert(void) {
 
 void testAdd(void) {
 	Core core;
-	Int8 firstOperand("8");
-	Int16 secondOperand("16");
-	Int8 thirdOperand("-24");
+	Hatchery hatchery;
+	IOperand *firstOperand = hatchery.createOperand(INT8, "8");
+	IOperand *secondOperand = hatchery.createOperand(INT16,"16");
+	IOperand *thirdOperand = hatchery.createOperand(INT32,"-24");
 	bool status = false;
 
 	try {
@@ -128,8 +128,8 @@ void testAdd(void) {
 		printError("Add method is not catching an exception as it ougth to be");
 	}
 
-	core.push(&firstOperand);
-	core.push(&secondOperand);
+	core.push(firstOperand);
+	core.push(secondOperand);
 	status = false;
 	try {
 		core.add();
@@ -145,7 +145,7 @@ void testAdd(void) {
 		printError("Add method is not adding elements correctly");
 	}
 
-	core.push(&thirdOperand);
+	core.push(thirdOperand);
 	status = false;
 	try {
 		core.add();
@@ -160,9 +160,10 @@ void testAdd(void) {
 
 void testSub(void) {
 	Core core;
-	Int8 firstOperand("8");
-	Int16 secondOperand("16");
-	Int8 thirdOperand("8");
+	Hatchery hatchery;
+	IOperand *firstOperand = hatchery.createOperand(INT8, "8");
+	IOperand *secondOperand = hatchery.createOperand(INT16, "16");
+	IOperand *thirdOperand = hatchery.createOperand(INT32, "8");
 	bool status = false;
 
 	try {
@@ -175,8 +176,8 @@ void testSub(void) {
 		printError("Sub method is not catching an exception as it ougth to be");
 	}
 
-	core.push(&firstOperand);
-	core.push(&secondOperand);
+	core.push(firstOperand);
+	core.push(secondOperand);
 	status = false;
 	try {
 		core.sub();
@@ -192,7 +193,7 @@ void testSub(void) {
 		printError("Sub method is not substribing elements correctly");
 	}
 
-	core.push(&thirdOperand);
+	core.push(thirdOperand);
 	status = false;
 	try {
 		core.sub();
@@ -207,9 +208,10 @@ void testSub(void) {
 
 void testMul(void) {
 	Core core;
-	Int8 firstOperand("8");
-	Int16 secondOperand("16");
-	Int8 thirdOperand("-1");
+	Hatchery hatchery;
+	IOperand *firstOperand = hatchery.createOperand(INT8, "8");
+	IOperand *secondOperand = hatchery.createOperand(INT16,"16");
+	IOperand *thirdOperand = hatchery.createOperand(INT32,"-1");
 	bool status = false;
 
 	try {
@@ -222,8 +224,8 @@ void testMul(void) {
 		printError("Mul method is not catching an exception as it ougth to be");
 	}
 
-	core.push(&firstOperand);
-	core.push(&secondOperand);
+	core.push(firstOperand);
+	core.push(secondOperand);
 	status = false;
 	try {
 		core.mul();
@@ -239,7 +241,7 @@ void testMul(void) {
 		printError("Mul method is not multiplying elements correctly");
 	}
 
-	core.push(&thirdOperand);
+	core.push(thirdOperand);
 	status = false;
 	try {
 		core.mul();
@@ -254,10 +256,10 @@ void testMul(void) {
 
 void testDiv(void) {
 	Core core;
-	Int8 firstOperand("8");
-	Int16 secondOperand("16");
-	Int32 thirdOperand("0");
-	Int8 fourthOperand("2");
+	Hatchery hatchery;
+	IOperand *firstOperand = hatchery.createOperand(INT8, "8");
+	IOperand *secondOperand = hatchery.createOperand(INT16,"16");
+	IOperand *thirdOperand = hatchery.createOperand(INT32,"0");
 	bool status = false;
 
 	try {
@@ -270,8 +272,8 @@ void testDiv(void) {
 		printError("Div method is not catching an exception as it ougth to be");
 	}
 
-	core.push(&firstOperand);
-	core.push(&secondOperand);
+	core.push(firstOperand);
+	core.push(secondOperand);
 	status = false;
 	try {
 		core.div();
@@ -287,7 +289,7 @@ void testDiv(void) {
 		printError("Div method is not multiplying elements correctly");
 	}
 
-	core.push(&thirdOperand);
+	core.push(thirdOperand);
 	status = false;
 	try {
 		core.div();
@@ -299,8 +301,8 @@ void testDiv(void) {
 		printError("Div method is not catching an exception as it ougth to be");		
 	}
 
-	core.push(&fourthOperand);
-	core.push(&firstOperand);
+	core.push(thirdOperand);
+	core.push(firstOperand);
 	status = false;
 	try {
 		core.div();
@@ -315,8 +317,9 @@ void testDiv(void) {
 
 void testMod(void) {
 	Core core;
-	Int8 firstOperand("8");
-	Int16 secondOperand("16");
+	Hatchery hatchery;
+	IOperand *firstOperand = hatchery.createOperand(INT8, "8");
+	IOperand *secondOperand = hatchery.createOperand(INT16, "15");
 	bool status = false;
 
 	try {
@@ -329,8 +332,8 @@ void testMod(void) {
 		printError("Mod method is not catching an exception as it ougth to be");
 	}
 
-	core.push(&firstOperand);
-	core.push(&secondOperand);
+	core.push(firstOperand);
+	core.push(secondOperand);
 	status = false;
 	try {
 		core.mod();
@@ -342,25 +345,38 @@ void testMod(void) {
 		printError("Mod method is not deleting elements in the stack after the operation");
 	}
 
-	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "0")) {
-		printError("Mod method is not multiplying elements correctly");
+	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "7")) {
+		printError("Mod method is not moduling elements correctly");
+	}
+
+	core.push(firstOperand);
+	core.push(firstOperand);
+	try {
+		core.mod();
+	} catch (const Error &error) {
+		status = true;
+	}
+
+	if (status == false) {
+		printError("Mod method is not catching an exception as it ougth to be");
 	}
 }
 
 void testPrint(void) {
 	Core core;
-	Int8 firstOperand("42");
-	Int16 secondOperand("42");
+	Hatchery hatchery;
+	IOperand *firstOperand = hatchery.createOperand(INT8, "42");
+	IOperand *secondOperand = hatchery.createOperand(INT16,"42");
 	bool status = false;
 
-	core.push(&firstOperand);
+	core.push(firstOperand);
 	try {
 		core.print();
 	} catch (const Error &error) {
 		printError("Print method is catching an exception");
 	}
 	
-	core.push(&secondOperand);
+	core.push(secondOperand);
 	status = false;
 	try {
 		core.print();
