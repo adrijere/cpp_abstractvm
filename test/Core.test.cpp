@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-17 20:52:35
+* @Last Modified time: 2015-02-17 21:12:53
 */
 
 #include "UnitTests.hpp"
@@ -19,7 +19,6 @@ void testMul(void);
 void testDiv(void);
 void testMod(void);
 void testPrint(void);
-void testExit(void);
 
 void testsCore(void) {
 	testPush();
@@ -32,7 +31,6 @@ void testsCore(void) {
 	testDiv();
 	testMod();
 	testPrint();
-	testExit();
 }
 
 void testPush(void) {
@@ -104,6 +102,31 @@ void testPop(void) {
 }
 
 void testDump(void) {
+	Core core;
+	Hatchery hatchery;
+
+	std::stringstream buffer;
+	std::streambuf * old = std::cout.rdbuf(buffer.rdbuf());
+
+	IOperand *firstOperand = hatchery.createOperand(Int8, "42");
+	IOperand *secondOperand = hatchery.createOperand(Int16, "42");
+	IOperand *thirdOperand = hatchery.createOperand(Int32, "-42");
+	IOperand *fourthOperand = hatchery.createOperand(Float, "42.50");
+	IOperand *fifthOperand = hatchery.createOperand(Double, "42.50");
+
+	core.push(firstOperand);
+	core.push(secondOperand);
+	core.push(thirdOperand);
+	core.push(fourthOperand);
+	core.push(fifthOperand);
+
+	core.dump();
+	std::string dump = buffer.str();
+	std::cout.rdbuf(old);
+
+	if (UnitTests::isNotEqual(dump, "42.5\n42.5\n-42\n42\n4\n")) {
+		printError("Dump method is not dumping all right values");
+	}
 }
 
 void testAssert(void) {
@@ -409,8 +432,4 @@ void testPrint(void) {
 	if (status == false) {
 		printError("Print method is not catching an exception as it ought to be");
 	}
-}
-
-void testExit(void) {
-
 }
