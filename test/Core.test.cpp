@@ -2,23 +2,23 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 09:34:55
+* @Last Modified time: 2015-02-18 10:26:35
 */
 
 #include "UnitTests.hpp"
 #include "Core.hpp"
 #include "Hatchery.hpp"
 
-void testPush(void);
-void testPop(void);
-void testDump(void);
-void testAssert(void);
-void testAdd(void);
-void testSub(void);
-void testMul(void);
-void testDiv(void);
-void testMod(void);
-void testPrint(void);
+static void testPush(void);
+static void testPop(void);
+static void testDump(void);
+static void testAssert(void);
+static void testAdd(void);
+static void testSub(void);
+static void testMul(void);
+static void testDiv(void);
+static void testMod(void);
+static void testPrint(void);
 
 void testsCore(void) {
 	testPush();
@@ -106,7 +106,7 @@ void testDump(void) {
 	Hatchery hatchery;
 
 	std::stringstream buffer;
-	std::streambuf * old = std::cout.rdbuf(buffer.rdbuf());
+	std::streambuf *old = std::cout.rdbuf(buffer.rdbuf());
 
 	IOperand *firstOperand = hatchery.createOperand(Int8, "42");
 	IOperand *secondOperand = hatchery.createOperand(Int16, "42");
@@ -411,8 +411,10 @@ void testPrint(void) {
 	Core core;
 	Hatchery hatchery;
 	IOperand *firstOperand = hatchery.createOperand(Int8, "42");
-	IOperand *secondOperand = hatchery.createOperand(Int16,"42");
 	bool status = false;
+
+	std::stringstream buffer;
+	std::streambuf *old = std::cout.rdbuf(buffer.rdbuf());
 
 	core.push(firstOperand);
 	try {
@@ -421,12 +423,30 @@ void testPrint(void) {
 		printError("Print method is catching an exception");
 	}
 	
+	IOperand *secondOperand= hatchery.createOperand(Int8, "97");
+	IOperand *thirdOperand = hatchery.createOperand(Int8, "110");
+	
+	// * ; a ; n
 	core.push(secondOperand);
+	core.print();
+	core.push(thirdOperand);
+	core.print();
+
+	std::string dump = buffer.str();
+	std::cout.rdbuf(old);
+
+	if (UnitTests::isNotEqual(dump, "*\na\nn\n")) {
+		printError("Print method is not printing the right characters");
+	}
+
+	IOperand *fifthOperand = hatchery.createOperand(Int16,"42");
+
+	core.push(fifthOperand);
 	status = false;
 	try {
 		core.print();
 	} catch (const Error &error) {
-		status = true;	
+		status = true;
 	}
 
 	if (status == false) {

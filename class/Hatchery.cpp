@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 10:18:09
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-17 20:52:00
+* @Last Modified time: 2015-02-18 10:26:01
 */
 
 #include "Hatchery.hpp"
@@ -28,6 +28,7 @@ IOperand *Hatchery::createInt8(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
+	// std::cout << "int8: " << convertedValue << " | value: " << value << std::endl;
 	return new Operand<int8_t>(convertedValue, Int8, LESS_ACCURATE);
 }
 

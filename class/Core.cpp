@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 09:34:41
+* @Last Modified time: 2015-02-18 10:18:56
 */
 
 #include "Core.hpp"
@@ -139,9 +139,20 @@ void Core::mod(void) {
 
 void Core::print(void) {
 	Hatchery hatchery;
-	IOperand *operand = hatchery.createOperand(Int8, ""); 
+	IOperand *operand = hatchery.createOperand(Int8, "Kafei"); 
 
-	this->assert(operand);
+	try {
+		this->assert(operand);	
+	} catch (const Error &error) {
+		throw Error("The last element on the stack is not an Int8");
+	}
+
+	std::istringstream buffer(this->_stack.top()->toString());
+	int value;
+
+	buffer >> value;
+	char ascii = static_cast<char>(value);
+	std::cout << ascii << std::endl;
 }
 
 void Core::exit(void) {
