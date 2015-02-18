@@ -10,6 +10,7 @@
 
 # include <iostream>
 # include <stack>
+# include <queue>
 
 # include "IOperand.hpp"
 
@@ -22,7 +23,7 @@ struct s_instructions {
 };
 
 class Memory {
-	std::stack<s_instructions> _instructions;
+	std::queue<s_instructions> _queue;
 	std::stack<IOperand *> _stack;
 
  public:
@@ -35,7 +36,7 @@ class Memory {
 	void popInstruction();
 	void pushInstruction(operandFunction, IOperand *);
 
-	std::stack<s_instructions> getInstructions(void) const;
+	std::queue<s_instructions> getQueue(void) const;
 	std::stack<IOperand *> getStack(void) const;
 };
 

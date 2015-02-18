@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-18 17:01:39
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 17:16:54
+* @Last Modified time: 2015-02-18 18:13:28
 */
 
 #include "UnitTests.hpp"
@@ -89,7 +89,7 @@ void testPopInstruction(void) {
 		printError("PopInstruction method is catching an exception");
 	}
 
-	if (UnitTests::isNotEqual((int)memory.getInstructions().size(), 0)) {
+	if (UnitTests::isNotEqual((int)memory.getQueue().size(), 0)) {
 		printError("Pop method is not deleting elements in the stack");
 	}
 }
@@ -105,7 +105,7 @@ void testPushInstruction(void) {
 		printError("PopInstruction method is catching an exception");
 	}
 
-	if (UnitTests::isNotEqual((int)memory.getInstructions().size(), 1)) {
+	if (UnitTests::isNotEqual((int)memory.getQueue().size(), 1)) {
 		printError("Pop method is not deleting elements in the stack");
 	}
 }

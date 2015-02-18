@@ -2,31 +2,39 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 16:25:08
+* @Last Modified time: 2015-02-18 18:41:36
 */
 
 #include "Core.hpp"
 #include "Hatchery.hpp"
 
-std::stack<IOperand *> Core::getStack(void) const {
-	return this->_stack;
+Memory Core::getMemory(void) const {
+	return this->_memory;
 }
 
 void Core::push(IOperand *operand) {
-	this->_stack.push(operand);
+	try {
+		this->_memory.push(operand);
+	} catch (const std::exception &error) {
+		throw CoreError("Push instruction is catching an exception");
+	}
 }
 
 void Core::pop(IOperand *operand) {
 	(void)operand;
-	if (this->_stack.empty()) {
+	if (this->_memory.getStack().empty()) {
 		throw CoreError("Pop instruction on an empty stack");
 	} else {
-		this->_stack.pop();
+		try {
+			this->_memory.pop();		
+		} catch (const std::exception &error) {
+			throw CoreError("Pop instruction is catching an exception");
+		}
 	}
 }
 
 void Core::dump(IOperand *operand) {
-	std::stack<IOperand *>stack = this->_stack;
+	std::stack<IOperand *>stack = this->_memory.getStack();
 
 	(void)operand;
 	while (stack.size() > 0) {
@@ -36,20 +44,20 @@ void Core::dump(IOperand *operand) {
 }
 
 void Core::assert(IOperand *operand) {
-	if (this->_stack.empty() or this->_stack.top()->getType() != operand->getType()) {
+	if (this->_memory.getStack().empty() or _memory.getStack().top()->getType() != operand->getType()) {
 		throw CoreError("Assert with a wrong operand type on the last element");
 	}
 }
 
 void Core::add(IOperand *operand) {
 	(void)operand;
-	if (this->_stack.size() < 2) {
+	if (this->_memory.getStack().size() < 2) {
 		throw CoreError("Add instruction is not possible unless two elements are present in the stack");
 	} else {
-		IOperand *firstOperand = this->_stack.top();
-		this->_stack.pop();
-		IOperand *secondOperand = this->_stack.top();
-		this->_stack.pop();
+		IOperand *firstOperand = this->_memory.getStack().top();
+		this->pop();
+		IOperand *secondOperand = this->_memory.getStack().top();
+		this->pop();
 
 		try {
 			this->push(*firstOperand + *secondOperand);
@@ -62,13 +70,13 @@ void Core::add(IOperand *operand) {
 
 void Core::sub(IOperand *operand) {
 	(void)operand;
-	if (this->_stack.size() < 2) {
+	if (this->_memory.getStack().size() < 2) {
 		throw CoreError("Sub instruction is not possible unless two elements are present in the stack");
 	} else {
-		IOperand *firstOperand = this->_stack.top();
-		this->_stack.pop();
-		IOperand *secondOperand = this->_stack.top();
-		this->_stack.pop();
+		IOperand *firstOperand = this->_memory.getStack().top();
+		this->pop();
+		IOperand *secondOperand = this->_memory.getStack().top();
+		this->pop();
 
 		try {
 			this->push(*firstOperand - *secondOperand);
@@ -81,13 +89,13 @@ void Core::sub(IOperand *operand) {
 
 void Core::mul(IOperand *operand) {
 	(void)operand;
-	if (this->_stack.size() < 2) {
+	if (this->_memory.getStack().size() < 2) {
 		throw CoreError("Mul instruction is not possible unless two elements are present in the stack");
 	} else {
-		IOperand *firstOperand = this->_stack.top();
-		this->_stack.pop();
-		IOperand *secondOperand = this->_stack.top();
-		this->_stack.pop();
+		IOperand *firstOperand = this->_memory.getStack().top();
+		this->pop();
+		IOperand *secondOperand = this->_memory.getStack().top();
+		this->pop();
 
 		try {
 			this->push(*firstOperand * (*secondOperand));
@@ -100,13 +108,13 @@ void Core::mul(IOperand *operand) {
 
 void Core::div(IOperand *operand) {
 	(void)operand;
-	if (this->_stack.size() < 2) {
+	if (this->_memory.getStack().size() < 2) {
 		throw CoreError("Div instruction is not possible unless two elements are present in the stack");
 	} else {
-		IOperand *firstOperand = this->_stack.top();
-		this->_stack.pop();
-		IOperand *secondOperand = this->_stack.top();
-		this->_stack.pop();
+		IOperand *firstOperand = this->_memory.getStack().top();
+		this->pop();
+		IOperand *secondOperand = this->_memory.getStack().top();
+		this->pop();
 
 		if (secondOperand->toString() == "0") {
 			throw CoreError("Div instruction is trying to divide by zero");
@@ -123,13 +131,13 @@ void Core::div(IOperand *operand) {
 
 void Core::mod(IOperand *operand) {
 	(void)operand;
-	if (this->_stack.size() < 2) {
+	if (this->_memory.getStack().size() < 2) {
 		throw CoreError("Mod instruction is not possible unless two elements are present in the stack");
 	} else {
-		IOperand *firstOperand = this->_stack.top();
-		this->_stack.pop();
-		IOperand *secondOperand = this->_stack.top();
-		this->_stack.pop();
+		IOperand *firstOperand = this->_memory.getStack().top();
+		this->pop();
+		IOperand *secondOperand = this->_memory.getStack().top();
+		this->pop();
 
 		if (secondOperand->toString() == "0") {
 			throw CoreError("Mod instruction is trying to divide by zero");
@@ -155,7 +163,7 @@ void Core::print(IOperand *operand) {
 		throw CoreError("The last element on the stack is not an Int8");
 	}
 
-	std::istringstream buffer(this->_stack.top()->toString());
+	std::istringstream buffer(this->_memory.getStack().top()->toString());
 	int value;
 
 	buffer >> value;

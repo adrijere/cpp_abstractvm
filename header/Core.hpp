@@ -16,14 +16,13 @@
 # include "Error.hpp"
 
 class Core {
-	std::stack<IOperand *> _stack;
 	Memory _memory;
 
  public:
 	Core() {};
 	~Core() {};
 
-	std::stack<IOperand *> getStack(void) const;
+	Memory getMemory(void) const;
 
 	void push(IOperand *);
 	void pop(IOperand * = 0);

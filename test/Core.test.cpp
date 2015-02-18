@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 15:55:05
+* @Last Modified time: 2015-02-18 18:35:26
 */
 
 #include "UnitTests.hpp"
@@ -46,7 +46,7 @@ void testPush(void) {
 		printError("Push method is catching an exception");
 	}
 
-	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "8")) {
+	if (UnitTests::isNotEqual(core.getMemory().getStack().top()->toString(), "8")) {
 		printError("Push method is not inserting the right value");
 	}
 
@@ -56,7 +56,7 @@ void testPush(void) {
 		printError("Push method is catching an exception");
 	}
 
-	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "42.85")) {
+	if (UnitTests::isNotEqual(core.getMemory().getStack().top()->toString(), "42.85")) {
 		printError("Push method is not inserting the right value");
 	}
 
@@ -66,7 +66,7 @@ void testPush(void) {
 		printError("Push method is catching an exception");
 	}
 
-	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "42")) {
+	if (UnitTests::isNotEqual(core.getMemory().getStack().top()->toString(), "42")) {
 		printError("Push method is not inserting the right value");
 	}
 }
@@ -96,7 +96,7 @@ void testPop(void) {
 		printError("Pop method is not catching an exception as it ought to be");
 	}
 
-	if (UnitTests::isNotEqual((int)secondCore.getStack().size(), 0)) {
+	if (UnitTests::isNotEqual((int)secondCore.getMemory().getStack().size(), 0)) {
 		printError("Pop method is not deleting elements in the stack");
 	}
 }
@@ -182,11 +182,11 @@ void testAdd(void) {
 		printError("Add method is catching an exception");
 	}
 
-	if (UnitTests::isNotEqual((int)core.getStack().size(), 1)) {
+	if (UnitTests::isNotEqual((int)core.getMemory().getStack().size(), 1)) {
 		printError("Add method is not deleting elements in the stack after the operation");
 	}
 
-	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "24")) {
+	if (UnitTests::isNotEqual(core.getMemory().getStack().top()->toString(), "24")) {
 		printError("Add method is not adding elements correctly");
 	}
 
@@ -230,11 +230,11 @@ void testSub(void) {
 		printError("Sub method is catching an exception");
 	}
 
-	if (UnitTests::isNotEqual((int)core.getStack().size(), 1)) {
+	if (UnitTests::isNotEqual((int)core.getMemory().getStack().size(), 1)) {
 		printError("Sub method is not deleting elements in the stack after the operation");
 	}
 
-	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "8")) {
+	if (UnitTests::isNotEqual(core.getMemory().getStack().top()->toString(), "8")) {
 		printError("Sub method is not substribing elements correctly");
 	}
 
@@ -278,11 +278,11 @@ void testMul(void) {
 		printError("Mul method is catching an exception");
 	}
 
-	if (UnitTests::isNotEqual((int)core.getStack().size(), 1)) {
+	if (UnitTests::isNotEqual((int)core.getMemory().getStack().size(), 1)) {
 		printError("Mul method is not deleting elements in the stack after the operation");
 	}
 
-	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "128")) {
+	if (UnitTests::isNotEqual(core.getMemory().getStack().top()->toString(), "128")) {
 		printError("Mul method is not multiplying elements correctly");
 	}
 
@@ -326,11 +326,11 @@ void testDiv(void) {
 		printError("Div method is catching an exception");
 	}
 
-	if (UnitTests::isNotEqual((int)core.getStack().size(), 1)) {
+	if (UnitTests::isNotEqual((int)core.getMemory().getStack().size(), 1)) {
 		printError("Div method is not deleting elements in the stack after the operation");
 	}
 
-	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "2")) {
+	if (UnitTests::isNotEqual(core.getMemory().getStack().top()->toString(), "2")) {
 		printError("Div method is not multiplying elements correctly");
 	}
 
@@ -386,11 +386,11 @@ void testMod(void) {
 		printError("Mod method is catching an exception");
 	}
 
-	if (UnitTests::isNotEqual((int)core.getStack().size(), 1)) {
+	if (UnitTests::isNotEqual((int)core.getMemory().getStack().size(), 1)) {
 		printError("Mod method is not deleting elements in the stack after the operation");
 	}
 
-	if (UnitTests::isNotEqual(core.getStack().top()->toString(), "7")) {
+	if (UnitTests::isNotEqual(core.getMemory().getStack().top()->toString(), "7")) {
 		printError("Mod method is not moduling elements correctly");
 	}
 
