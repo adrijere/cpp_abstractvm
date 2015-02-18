@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 13:45:03
+* @Last Modified time: 2015-02-18 16:25:08
 */
 
 #include "Core.hpp"
@@ -16,7 +16,8 @@ void Core::push(IOperand *operand) {
 	this->_stack.push(operand);
 }
 
-void Core::pop(void) {
+void Core::pop(IOperand *operand) {
+	(void)operand;
 	if (this->_stack.empty()) {
 		throw CoreError("Pop instruction on an empty stack");
 	} else {
@@ -24,9 +25,10 @@ void Core::pop(void) {
 	}
 }
 
-void Core::dump(void) {
+void Core::dump(IOperand *operand) {
 	std::stack<IOperand *>stack = this->_stack;
 
+	(void)operand;
 	while (stack.size() > 0) {
 		std::cout << stack.top()->toString() << std::endl;
 		stack.pop();
@@ -39,7 +41,8 @@ void Core::assert(IOperand *operand) {
 	}
 }
 
-void Core::add(void) {
+void Core::add(IOperand *operand) {
+	(void)operand;
 	if (this->_stack.size() < 2) {
 		throw CoreError("Add instruction is not possible unless two elements are present in the stack");
 	} else {
@@ -57,7 +60,8 @@ void Core::add(void) {
 	}
 }
 
-void Core::sub(void) {
+void Core::sub(IOperand *operand) {
+	(void)operand;
 	if (this->_stack.size() < 2) {
 		throw CoreError("Sub instruction is not possible unless two elements are present in the stack");
 	} else {
@@ -75,7 +79,8 @@ void Core::sub(void) {
 	}
 }
 
-void Core::mul(void) {
+void Core::mul(IOperand *operand) {
+	(void)operand;
 	if (this->_stack.size() < 2) {
 		throw CoreError("Mul instruction is not possible unless two elements are present in the stack");
 	} else {
@@ -93,7 +98,8 @@ void Core::mul(void) {
 	}
 }
 
-void Core::div(void) {
+void Core::div(IOperand *operand) {
+	(void)operand;
 	if (this->_stack.size() < 2) {
 		throw CoreError("Div instruction is not possible unless two elements are present in the stack");
 	} else {
@@ -115,7 +121,8 @@ void Core::div(void) {
 	}
 }
 
-void Core::mod(void) {
+void Core::mod(IOperand *operand) {
+	(void)operand;
 	if (this->_stack.size() < 2) {
 		throw CoreError("Mod instruction is not possible unless two elements are present in the stack");
 	} else {
@@ -137,12 +144,13 @@ void Core::mod(void) {
 	}
 }
 
-void Core::print(void) {
+void Core::print(IOperand *operand) {
 	Hatchery hatchery;
-	IOperand *operand = hatchery.createOperand(Int8, "Kafei"); 
+	IOperand *newOperand = hatchery.createOperand(Int8, "Kafei"); 
 
+	(void)operand;
 	try {
-		this->assert(operand);	
+		this->assert(newOperand);	
 	} catch (const OperandError &error) {
 		throw CoreError("The last element on the stack is not an Int8");
 	}

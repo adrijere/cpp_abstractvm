@@ -1,4 +1,5 @@
-C_SRC 	+=		class/Core.cpp \
+C_SRC 	+=		class/Memory.cpp \
+				class/Core.cpp \
 				class/Hatchery.cpp \
 				class/Error.cpp \
 				class/Parsing.cpp

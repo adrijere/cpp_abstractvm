@@ -11,11 +11,13 @@
 # include <iostream>
 # include <stack>
 
-# include "Error.hpp"
+# include "Memory.hpp"
 # include "IOperand.hpp"
+# include "Error.hpp"
 
 class Core {
 	std::stack<IOperand *> _stack;
+	Memory _memory;
 
  public:
 	Core() {};
@@ -24,15 +26,15 @@ class Core {
 	std::stack<IOperand *> getStack(void) const;
 
 	void push(IOperand *);
-	void pop(void);
-	void dump(void);
+	void pop(IOperand * = 0);
+	void dump(IOperand * = 0);
 	void assert(IOperand *);
-	void add(void);
-	void sub(void);
-	void mul(void);
-	void div(void);
-	void mod(void);
-	void print(void);
+	void add(IOperand * = 0);
+	void sub(IOperand * = 0);
+	void mul(IOperand * = 0);
+	void div(IOperand * = 0);
+	void mod(IOperand * = 0);
+	void print(IOperand * = 0);
 };
 
 #endif /* !CORE_HPP_ */
