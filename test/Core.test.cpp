@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 10:36:35
+* @Last Modified time: 2015-02-18 13:44:41
 */
 
 #include "UnitTests.hpp"
@@ -124,7 +124,7 @@ void testDump(void) {
 	std::string dump = buffer.str();
 	std::cout.rdbuf(old);
 
-	if (UnitTests::isNotEqual(dump, "42.5\n42.5\n-42\n42\n4\n")) {
+	if (UnitTests::isNotEqual(dump, "42.5\n42.5\n-42\n42\n42\n")) {
 		printError("Dump method is not dumping all right values");
 	}
 }

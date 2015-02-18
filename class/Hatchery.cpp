@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 10:18:09
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 10:33:01
+* @Last Modified time: 2015-02-18 13:47:48
 */
 
 #include "Hatchery.hpp"
@@ -24,12 +24,11 @@ IOperand *Hatchery::createOperand(eOperandType type, const std::string &value) {
 }
 
 IOperand *Hatchery::createInt8(const std::string &value) {
-	int8_t convertedValue;
+	short convertedValue;
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	// std::cout << "int8: " << convertedValue << " | value: " << value << std::endl;
-	return new Operand<int8_t>(convertedValue, Int8, LESS_ACCURATE);
+	return new Operand<short>(convertedValue, Int8, LESS_ACCURATE);
 }
 
 IOperand *Hatchery::createInt16(const std::string &value) {

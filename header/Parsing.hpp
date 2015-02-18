@@ -9,10 +9,24 @@
 # define PARSING_HPP_
 
 # include <iostream>
+# include <map>
+
+# include "Core.hpp"
 # include "Error.hpp"
 
-class Parsing {
+typedef void (Core::*voidFunction)(void);
+typedef void (Core::*operandFunction)(IOperand *);
 
+class Parsing {
+	std::map<std::string, voidFunction> _firstMap;
+	std::map<std::string, operandFunction> _secondMap;
+
+ public:
+	Parsing();
+	~Parsing() {};
+
+	std::map<std::string, voidFunction> getFirstMap(void) const;
+	std::map<std::string, operandFunction> getSecondMap(void) const;
 };
 
 #endif /* !PARSING_HPP_ */
