@@ -19,7 +19,7 @@ class Core {
 	void push(IOperand *);
 	void pop(void);
 	void dump(void);
-	void assert(const IOperand &);
+	void assert(IOperand *);
 	void add(void);
 	void sub(void);
 	void mul(void);

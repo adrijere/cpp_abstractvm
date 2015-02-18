@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-17 21:12:53
+* @Last Modified time: 2015-02-18 09:34:55
 */
 
 #include "UnitTests.hpp"
@@ -138,14 +138,14 @@ void testAssert(void) {
 
 	core.push(firstOperand);
 	try {
-		core.assert(*firstOperand);
+		core.assert(firstOperand);
 	} catch (const Error &error) {
 		printError("Assert method is catching an exception");
 	}
 
 	status = false;
 	try {
-		core.assert(*secondOperand);
+		core.assert(secondOperand);
 	} catch (const Error &error) {
 		status = true;
 	}
