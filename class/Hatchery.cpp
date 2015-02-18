@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 10:18:09
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 10:26:01
+* @Last Modified time: 2015-02-18 10:33:01
 */
 
 #include "Hatchery.hpp"
@@ -19,7 +19,7 @@ IOperand *Hatchery::createOperand(eOperandType type, const std::string &value) {
 	if (this->arrayMethod[type]) {
 		return (this->*arrayMethod[type])(value);
 	} else {
-		throw Error("OperandType for array to member pointers undefined");
+		throw HatcheryError("OperandType for array to member pointers undefined");
 	}
 }
 

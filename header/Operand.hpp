@@ -46,7 +46,7 @@ class Operand : public IOperand {
 		thirdBuffer << firstValue + secondValue;
 
 		if (firstValue + secondValue < 2) {
-			throw Error("Trying to push a result lower than 2");
+			throw OperandError("Trying to push a result lower than 2");
 		} else {
 			if (this->getPrecision() <= rhs.getPrecision()) {
 				operand = hatchery.createOperand(rhs.getType(), thirdBuffer.str());
@@ -74,7 +74,7 @@ class Operand : public IOperand {
 		thirdBuffer << firstValue - secondValue;
 
 		if (firstValue - secondValue < 2) {
-			throw Error("Trying to push a result lower than 2");
+			throw OperandError("Trying to push a result lower than 2");
 		} else {
 			if (this->getPrecision() <= rhs.getPrecision()) {
 				operand = hatchery.createOperand(rhs.getType(), thirdBuffer.str());
@@ -102,7 +102,7 @@ class Operand : public IOperand {
 		thirdBuffer << firstValue * secondValue;
 
 		if (firstValue * secondValue < 2) {
-			throw Error("Trying to push a result lower than 2");
+			throw OperandError("Trying to push a result lower than 2");
 		} else {
 			if (this->getPrecision() <= rhs.getPrecision()) {
 				operand = hatchery.createOperand(rhs.getType(), thirdBuffer.str());
@@ -130,7 +130,7 @@ class Operand : public IOperand {
 		thirdBuffer << firstValue / secondValue;
 
 		if (firstValue / secondValue < 2) {
-			throw Error("Trying to push a result lower than 2");
+			throw OperandError("Trying to push a result lower than 2");
 		} else {
 			if (this->getPrecision() <= rhs.getPrecision()) {
 				operand = hatchery.createOperand(rhs.getType(), thirdBuffer.str());
@@ -158,7 +158,7 @@ class Operand : public IOperand {
 		thirdBuffer << firstValue % secondValue;
 
 		if (firstValue % secondValue < 2) {
-			throw Error("Trying to push a result lower than 2");
+			throw OperandError("Trying to push a result lower than 2");
 		} else {
 			if (this->getPrecision() <= rhs.getPrecision()) {
 				operand = hatchery.createOperand(rhs.getType(), thirdBuffer.str());

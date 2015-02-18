@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 10:26:35
+* @Last Modified time: 2015-02-18 10:36:35
 */
 
 #include "UnitTests.hpp"
@@ -81,14 +81,14 @@ void testPop(void) {
 	firstCore.push(operand);
 	try {
 		firstCore.pop();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		printError("Pop method is catching an exception");
 	}
 
 	status = false;
 	try {
 		secondCore.pop();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -139,14 +139,14 @@ void testAssert(void) {
 	core.push(firstOperand);
 	try {
 		core.assert(firstOperand);
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		printError("Assert method is catching an exception");
 	}
 
 	status = false;
 	try {
 		core.assert(secondOperand);
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -165,7 +165,7 @@ void testAdd(void) {
 
 	try {
 		core.add();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -178,7 +178,7 @@ void testAdd(void) {
 	status = false;
 	try {
 		core.add();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		printError("Add method is catching an exception");
 	}
 
@@ -194,7 +194,7 @@ void testAdd(void) {
 	status = false;
 	try {
 		core.add();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -213,7 +213,7 @@ void testSub(void) {
 
 	try {
 		core.sub();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -226,7 +226,7 @@ void testSub(void) {
 	status = false;
 	try {
 		core.sub();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		printError("Sub method is catching an exception");
 	}
 
@@ -242,7 +242,7 @@ void testSub(void) {
 	status = false;
 	try {
 		core.sub();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -261,7 +261,7 @@ void testMul(void) {
 
 	try {
 		core.mul();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -274,7 +274,7 @@ void testMul(void) {
 	status = false;
 	try {
 		core.mul();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		printError("Mul method is catching an exception");
 	}
 
@@ -290,7 +290,7 @@ void testMul(void) {
 	status = false;
 	try {
 		core.mul();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -309,7 +309,7 @@ void testDiv(void) {
 
 	try {
 		core.div();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -322,7 +322,7 @@ void testDiv(void) {
 	status = false;
 	try {
 		core.div();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		printError("Div method is catching an exception");
 	}
 
@@ -338,7 +338,7 @@ void testDiv(void) {
 	status = false;
 	try {
 		core.div();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -351,7 +351,7 @@ void testDiv(void) {
 	status = false;
 	try {
 		core.div();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -369,7 +369,7 @@ void testMod(void) {
 
 	try {
 		core.mod();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -382,7 +382,7 @@ void testMod(void) {
 	status = false;
 	try {
 		core.mod();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		printError("Mod method is catching an exception");
 	}
 
@@ -398,7 +398,7 @@ void testMod(void) {
 	core.push(firstOperand);
 	try {
 		core.mod();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
@@ -419,7 +419,7 @@ void testPrint(void) {
 	core.push(firstOperand);
 	try {
 		core.print();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		printError("Print method is catching an exception");
 	}
 	
@@ -445,7 +445,7 @@ void testPrint(void) {
 	status = false;
 	try {
 		core.print();
-	} catch (const Error &error) {
+	} catch (const CoreError &error) {
 		status = true;
 	}
 
