@@ -32,8 +32,11 @@ class Memory {
 	void pop();
 	void push(IOperand *);
 
-	void popInstructions();
-	void pushInstructions(operandFunction, IOperand *);
+	void popInstruction();
+	void pushInstruction(operandFunction, IOperand *);
+
+	std::stack<s_instructions> getInstructions(void) const;
+	std::stack<IOperand *> getStack(void) const;
 };
 
 #endif /* !MEMORY_HPP_ */
