@@ -1,27 +1,36 @@
-/* 
-* @Author: gicque_p
-* @Date:   2015-02-18 11:01:55
-* @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 11:35:07
+/*
+** Parser.cpp for Parser in /home/mathon_j/rendu/cpp_abstractvm/class
+** 
+** Made by Jérémy MATHON
+** Login   <mathon_j@mathonj>
+** 
+** Started on  Tue Feb 17 22:44:53 2015 Jérémy MATHON
+** Last update Wed Feb 18 15:19:36 2015 Jérémy MATHON
 */
 
-#include "Parsing.hpp"
+#include	"Parsing.hpp"
 
-Parsing::Parsing() {
-	this->_firstMap["pop"] = &Core::pop;
-	this->_firstMap["dump"] = &Core::dump;
-	this->_firstMap["add"] = &Core::add;
-	this->_firstMap["sub"] = &Core::sub;
-	this->_firstMap["mul"] = &Core::mul;
-	this->_firstMap["div"] = &Core::div;
-	this->_firstMap["mod"] = &Core::mod;
-	this->_firstMap["print"] = &Core::print;
+std::list<std::string>	Parsing::getInstruction(void) const
+{
+  return (this->_instructions);
 }
 
-std::map<std::string, voidFunction> Parsing::getFirstMap(void) const {
-	return this->_firstMap;
+std::list<std::string>	Parsing::getValue(void) const 
+{
+  return (this->_value);
 }
 
-std::map<std::string, operandFunction> Parsing::getSecondMap(void) const {
-	return this->_secondMap;
+char			*Parsing::getSep(void) const
+{
+  return (this->_sep);
+}
+
+void			Parsing::addInstruction(std::string ins)
+{
+  this->_instructions.push_back(ins);
+}
+
+void			Parsing::addValue(std::string value)
+{
+  this->_value.push_back(value);
 }

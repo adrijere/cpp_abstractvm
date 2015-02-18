@@ -1,32 +1,37 @@
-/* 
-* @Author: gicque_p
-* @Date:   2015-02-13 14:22:30
-* @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 10:38:43
+/*
+** Parser.hpp for Parser in /home/mathon_j/rendu/cpp_abstractvm/header
+** 
+** Made by Jérémy MATHON
+** Login   <mathon_j@mathonj>
+** 
+** Started on  Tue Feb 17 22:39:20 2015 Jérémy MATHON
+** Last update Wed Feb 18 15:19:23 2015 Jérémy MATHON
 */
 
 #ifndef PARSING_HPP_
 # define PARSING_HPP_
 
-# include <iostream>
-# include <map>
+# include	<iostream>
+# include	<list>
+# include	<string>
 
-# include "Core.hpp"
-# include "Error.hpp"
+# include	"Error.hpp"
 
-typedef void (Core::*voidFunction)(void);
-typedef void (Core::*operandFunction)(IOperand *);
+class	Parsing
+{
+  std::list<std::string>	_instructions;
+  std::list<std::string>	_value;
+  char				*_sep;
 
-class Parsing {
-	std::map<std::string, voidFunction> _firstMap;
-	std::map<std::string, operandFunction> _secondMap;
-
- public:
-	Parsing();
-	~Parsing() {};
-
-	std::map<std::string, voidFunction> getFirstMap(void) const;
-	std::map<std::string, operandFunction> getSecondMap(void) const;
+public:
+  Parsing() {};
+  ~Parsing() {};
+  
+  std::list<std::string>	getInstruction(void) const;
+  std::list<std::string>	getValue(void) const;
+  char				*getSep(void) const;
+  void				addInstruction(std::string);
+  void				addValue(std::string);
 };
 
 #endif /* !PARSING_HPP_ */
