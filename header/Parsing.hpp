@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Tue Feb 17 22:39:20 2015 Jérémy MATHON
-** Last update Wed Feb 18 15:19:23 2015 Jérémy MATHON
+** Last update Wed Feb 18 16:13:55 2015 Jérémy MATHON
 */
 
 #ifndef PARSING_HPP_
@@ -14,6 +14,7 @@
 # include	<iostream>
 # include	<list>
 # include	<string>
+# include	<fstream>
 
 # include	"Error.hpp"
 
@@ -32,6 +33,8 @@ public:
   char				*getSep(void) const;
   void				addInstruction(std::string);
   void				addValue(std::string);
+  void				parsingGrammar();
+  void				checkLine(std::string const &);
 };
 
 #endif /* !PARSING_HPP_ */
