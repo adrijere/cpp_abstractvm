@@ -7,3 +7,12 @@
 
 #include "UnitTests.hpp"
 #include "Parsing.hpp"
+
+static void	testParsingGrammar(void);
+
+void	testParsingGrammar(void)
+{
+  Parsing	parser;
+
+  parser.parsingGrammar();
+}
