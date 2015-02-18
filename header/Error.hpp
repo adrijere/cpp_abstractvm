@@ -1,3 +1,10 @@
+/* 
+* @Author: gicque_p
+* @Date:   2015-02-13 14:22:30
+* @Last Modified by:   gicque_p
+* @Last Modified time: 2015-02-18 10:38:43
+*/
+
 #ifndef ERROR_HPP_
 # define ERROR_HPP_
 
