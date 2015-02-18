@@ -26,7 +26,6 @@ class Core {
 	void div(void);
 	void mod(void);
 	void print(void);
-	void exit(void);
 };
 
 #endif /* !CORE_HPP_ */

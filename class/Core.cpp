@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 10:34:12
+* @Last Modified time: 2015-02-18 10:38:43
 */
 
 #include "Core.hpp"
@@ -153,8 +153,4 @@ void Core::print(void) {
 	buffer >> value;
 	char ascii = static_cast<char>(value);
 	std::cout << ascii << std::endl;
-}
-
-void Core::exit(void) {
-
 }
