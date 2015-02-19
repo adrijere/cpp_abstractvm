@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 18:35:26
+* @Last Modified time: 2015-02-19 16:53:30
 */
 
 #include "UnitTests.hpp"
@@ -92,7 +92,7 @@ void testPop(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Pop method is not catching an exception as it ought to be");
 	}
 
@@ -150,7 +150,7 @@ void testAssert(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Assert method is not catching an exception as it ought to be");
 	}
 }
@@ -169,7 +169,7 @@ void testAdd(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Add method is not catching an exception as it ougth to be");
 	}
 
@@ -198,7 +198,7 @@ void testAdd(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Add method is not catching an exception as it ougth to be");
 	}
 }
@@ -217,7 +217,7 @@ void testSub(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Sub method is not catching an exception as it ougth to be");
 	}
 
@@ -246,7 +246,7 @@ void testSub(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Sub method is not catching an exception as it ougth to be");
 	}
 }
@@ -265,7 +265,7 @@ void testMul(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Mul method is not catching an exception as it ougth to be");
 	}
 
@@ -294,7 +294,7 @@ void testMul(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Mul method is not catching an exception as is ougth to be");
 	}
 }
@@ -313,7 +313,7 @@ void testDiv(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Div method is not catching an exception as it ougth to be");
 	}
 
@@ -342,7 +342,7 @@ void testDiv(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Div method is not catching an exception as it ougth to be");		
 	}
 
@@ -355,7 +355,7 @@ void testDiv(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Div method is not catching an exception as it ougth to be");
 	}
 }
@@ -373,7 +373,7 @@ void testMod(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Mod method is not catching an exception as it ougth to be");
 	}
 
@@ -402,7 +402,7 @@ void testMod(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Mod method is not catching an exception as it ougth to be");
 	}
 }
@@ -449,7 +449,7 @@ void testPrint(void) {
 		status = true;
 	}
 
-	if (status == false) {
+	if (UnitTests::isFalse(status)) {
 		printError("Print method is not catching an exception as it ought to be");
 	}
 }
