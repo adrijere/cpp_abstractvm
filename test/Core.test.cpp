@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-19 16:53:30
+* @Last Modified time: 2015-02-20 15:30:30
 */
 
 #include "UnitTests.hpp"
@@ -426,7 +426,6 @@ void testPrint(void) {
 	IOperand *secondOperand= hatchery.createOperand(Int8, "97");
 	IOperand *thirdOperand = hatchery.createOperand(Int8, "110");
 	
-	// * ; a ; n
 	core.push(secondOperand);
 	core.print();
 	core.push(thirdOperand);

@@ -6,7 +6,7 @@
 ##
 
 CXX		=	g++
-CXXFLAGS=	-W -Wall -Wextra -I./header/ -g
+CXXFLAGS=	-W -Wall -Wextra -I./header/
 RM		=	rm -rf
 NAME	=	avm
 T_NAME	=	unit
