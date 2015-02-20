@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Tue Feb 17 22:39:20 2015 Jérémy MATHON
-** Last update Wed Feb 18 16:13:55 2015 Jérémy MATHON
+** Last update Fri Feb 20 22:48:27 2015 Jérémy MATHON
 */
 
 #ifndef PARSING_HPP_
@@ -34,7 +34,7 @@ public:
   void				addInstruction(std::string);
   void				addValue(std::string);
   void				parsingGrammar();
-  void				checkLine(std::string const &);
+  void				checkLine(std::string &);
 };
 
 #endif /* !PARSING_HPP_ */

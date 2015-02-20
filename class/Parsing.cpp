@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Tue Feb 17 22:44:53 2015 Jérémy MATHON
-** Last update Wed Feb 18 16:31:23 2015 Jérémy MATHON
+** Last update Fri Feb 20 23:18:17 2015 Jérémy MATHON
 */
 
 #include	"Parsing.hpp"
@@ -35,9 +35,31 @@ void			Parsing::addValue(std::string value)
   this->_value.push_back(value);
 }
 
-void			Parsing::checkLine(std::string const &ins)
+void			Parsing::checkLine(std::string &ins)
 {
-  std::cout << ins << std::endl;
+  size_t		cpt;
+  char			*tmp;
+  int			i;
+
+  cpt = 0;
+  if (ins[0] != '|' or ins.empty())
+    throw ParsingError("Wrong instruction.");
+  ins.erase(0, 2);
+  cpt = ins.find("VALEUR");
+  if (cpt != std::string::npos)
+    {
+      i = ins.copy(tmp, cpt, 0);
+      tmp[i] = '\0';
+      ins.erase(0, cpt);
+      addInstruction(tmp);
+      addValue(ins);
+      ins.clear();
+    }
+  else
+    {
+      addInstruction(ins);
+      addValue("-1");
+    }
 }
 
 void			Parsing::parsingGrammar()
@@ -52,7 +74,7 @@ void			Parsing::parsingGrammar()
     {
       if (ins == "INSTR :=")
 	{
-	  while (ins.compare(" ") != 0)
+	  while (ins.compare("\n") != 0)
 	    {
 	      std::getline(file, ins);
 	      checkLine(ins);
