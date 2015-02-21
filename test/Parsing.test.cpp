@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-18 11:02:02
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-21 12:21:29
+* @Last Modified time: 2015-02-21 12:25:11
 */
 
 #include "UnitTests.hpp"
@@ -81,7 +81,7 @@ void testGetGrammar(void) {
 	}
 
 	try {
-		fifthParsing.getGrammar("grammar.txt");
+		fifthParsing.getGrammar("test/data/goodGrammar.txt");
 	} catch (const ParsingError &error) {
 		printError("GetGrammar method is catching an exception");		
 	}
