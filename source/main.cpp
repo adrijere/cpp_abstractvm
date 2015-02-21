@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-12 09:59:22
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-21 17:29:49
+* @Last Modified time: 2015-02-21 19:52:22
 */
 
 #include "Parsing.hpp"
@@ -15,13 +15,21 @@ int main(int argc, char **argv) {
 	try {
 		if (argc > 1) {
 			std::ifstream file(argv[1]);
-			parsing.getCommands(file);
+			parsing.getCommands(file, &core);
 		} else {
-			parsing.getCommands(std::cin);
-		}		
+			parsing.getCommands(std::cin, &core);
+		}
 	} catch (const ParsingError &error) {
 		std::cerr << error.what() << std::endl;
+		return -1;
 	}
 
-    return 0;
+	try {
+		core.execute();
+	} catch (const CoreError &error) {
+		std::cerr << error.what() << std::endl;
+		return -1;
+	}
+
+	return 0;
 }

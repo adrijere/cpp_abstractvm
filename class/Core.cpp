@@ -2,14 +2,34 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-21 17:44:54
+* @Last Modified time: 2015-02-21 20:06:54
 */
 
 #include "Core.hpp"
 #include "Hatchery.hpp"
 
+void Core::execute(void) {
+	while (this->_memory.getQueue().size() > 0) {
+		try {
+			(this->*this->_memory.getQueue().front().first)(this->_memory.getQueue().front().second);
+			this->_memory.popInstruction();
+		} catch (const CoreError &error) {
+			throw CoreError(error.what());
+			break;
+		}
+	}
+}
+
 Memory Core::getMemory(void) const {
 	return this->_memory;
+}
+
+void Core::pushMemoryInstruction(operandFunction function, IOperand *operand) {
+	try {
+		this->_memory.pushInstruction(function, operand);
+	} catch (const std::exception &error) {
+		throw CoreError("PushMemory instrcution is catching an exception");
+	}
 }
 
 void Core::push(IOperand *operand) {
@@ -163,6 +183,7 @@ void Core::print(IOperand *operand) {
 		throw CoreError("The last element on the stack is not an Int8");
 	}
 
+	delete(newOperand);
 	std::istringstream buffer(this->_memory.getStack().top()->toString());
 	int value;
 
@@ -173,6 +194,5 @@ void Core::print(IOperand *operand) {
 
 void Core::exit(IOperand *operand) {
 	(void)operand;
-
-	exit(EXIT_SUCCESS);
+	throw CoreError("End of programm");
 }

@@ -23,18 +23,30 @@ Parsing::Parsing() {
 	this->_instructions.push_back(std::make_pair("print", false));
 	this->_instructions.push_back(std::make_pair("exit", false));
 
-	this->_values.push_back("int8");
-	this->_values.push_back("int16");
-	this->_values.push_back("int32");
-	this->_values.push_back("float");
-	this->_values.push_back("double");
+	this->_values["int8"] = Int8;
+	this->_values["int16"] = Int16;
+	this->_values["int32"] = Int32;
+	this->_values["float"] = Float;
+	this->_values["double"] = Double;
 
-	this->_line = 1;
+	this->_map["push"] = &Core::push;
+	this->_map["pop"] = &Core::pop;
+	this->_map["dump"] = &Core::dump;
+	this->_map["assert"] = &Core::assert;
+	this->_map["add"] = &Core::add;
+	this->_map["sub"] = &Core::sub;
+	this->_map["mul"] = &Core::mul;
+	this->_map["div"] = &Core::div;
+	this->_map["mod"] = &Core::mod;
+	this->_map["print"] = &Core::print;
+	this->_map["exit"] = &Core::exit;
+
+	this->_line = 1;	
 	this->_elements = 0;
 	this->_exit = false;
 }
 
-void Parsing::getCommands(std::istream &in) {
+void Parsing::getCommands(std::istream &in, Core *core) {
 	std::string line;
 
 	if (in) {
@@ -53,7 +65,7 @@ void Parsing::getCommands(std::istream &in) {
 				}
 
 				try {
-					this->commandLine(line);
+					this->commandLine(line, core);
 				} catch (const ParsingError &error) {
 					throw ParsingError(this->getErrorLine(error.what()));
 				}
@@ -68,7 +80,7 @@ void Parsing::getCommands(std::istream &in) {
 		throw ParsingError("Commands file does not exists");
 	}
 }
-void Parsing::commandLine(const std::string &line) {
+void Parsing::commandLine(const std::string &line, Core *core) {
 
 	std::istringstream word(line);
 	std::string instruction;
@@ -93,7 +105,7 @@ void Parsing::commandLine(const std::string &line) {
 	if (std::find(this->_instructions.begin(), this->_instructions.end(), std::make_pair(instruction, status)) == this->_instructions.end()) {
 		throw ParsingError("Undefined instruction");
 	} else {
-		if (!type.empty() and std::find(this->_values.begin(), this->_values.end(), type) == this->_values.end()) {
+		if (!type.empty() and this->_values.find(type) == this->_values.end()) {
 			throw ParsingError("Undefined type");
 		} else {
 			try {
@@ -108,7 +120,7 @@ void Parsing::commandLine(const std::string &line) {
 				throw ParsingError(error.what());
 			}
 
-			// std::cout << "instr: " << instruction << "\t| type: " << type << "\t| value: " << value << std::endl;
+			this->createInstruction(instruction, type, value, core);
 		}
 	}
 }
@@ -136,6 +148,20 @@ void Parsing::isNumber(const std::string &value) {
 	}
 }
 
+void Parsing::createInstruction(const std::string &instr, const std::string &type, const std::string &value, Core *core) {
+	Hatchery hatchery;
+
+	if (this->_map.find(instr) != this->_map.end()) {		
+		try {
+			IOperand *operand = hatchery.createOperand(this->_values[type], value);
+			core->pushMemoryInstruction(this->_map[instr], operand);
+		} catch (const std::exception &error) {
+			throw ParsingError(error.what());
+		}
+	}
+
+}
+
 std::string Parsing::getErrorLine(const char *specification) const {
 	std::stringstream stream;
 	stream << "Line ";
@@ -144,12 +170,4 @@ std::string Parsing::getErrorLine(const char *specification) const {
 	stream << specification;
 
 	return stream.str();
-}
-
-std::list<std::pair<std::string, bool> > Parsing::getInstructions(void) const {
-	return this->_instructions;
-}
-
-std::list<std::string>	Parsing::getValues(void) const {
-	return this->_values;
 }

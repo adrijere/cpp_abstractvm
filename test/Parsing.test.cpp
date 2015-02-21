@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-18 11:02:02
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-21 18:22:54
+* @Last Modified time: 2015-02-21 19:25:27
 */
 
 #include "UnitTests.hpp"
@@ -30,12 +30,13 @@ void testGetCommands(void) {
 	Parsing fourthParsing;
 	Parsing fifthParsing;
 	Parsing sixthParsing;
+	Core core;
 	bool status = false;
 
 	status = false;
 	try {
 		std::ifstream file("test/data/wrongexample1.avm");
-		firstParsing.getCommands(file);
+		firstParsing.getCommands(file, &core);
 	} catch (const ParsingError &error) {
 		status = true;
 	}
@@ -47,7 +48,7 @@ void testGetCommands(void) {
 	status = false;
 	try {
 		std::ifstream file("test/data/wrongexample2.avm");
-		secondParsing.getCommands(file);
+		secondParsing.getCommands(file, &core);
 	} catch (const ParsingError &error) {
 		status = true;
 	}
@@ -59,7 +60,7 @@ void testGetCommands(void) {
 	status = false;
 	try {
 		std::ifstream file("test/data/wrongexample3.avm");
-		thirdParsing.getCommands(file);
+		thirdParsing.getCommands(file, &core);
 	} catch (const ParsingError &error) {
 		status = true;
 	}
@@ -71,7 +72,7 @@ void testGetCommands(void) {
 	status = false;
 	try {
 		std::ifstream file("test/data/wrongexample4.avm");
-		fourthParsing.getCommands(file);
+		fourthParsing.getCommands(file, &core);
 	} catch (const ParsingError &error) {
 		status = true;
 	}
@@ -83,7 +84,7 @@ void testGetCommands(void) {
 	status = false;
 	try {
 		std::ifstream file("test/data/wrongexample5.avm");
-		fifthParsing.getCommands(file);
+		fifthParsing.getCommands(file, &core);
 	} catch (const ParsingError &error) {
 		status = true;
 	}
@@ -94,7 +95,7 @@ void testGetCommands(void) {
 
 	try {
 		std::ifstream file("test/data/example.avm");
-		sixthParsing.getCommands(file);
+		sixthParsing.getCommands(file, &core);
 	} catch (const ParsingError &error) {
 		printError("getCommands method is catching an exception");		
 	}
@@ -103,10 +104,11 @@ void testGetCommands(void) {
 
 static void testCommandLine(void) {
 	Parsing parsing;
+	Core core;
 	bool status = false;
 
 	try {
-		parsing.commandLine("push");
+		parsing.commandLine("push", &core);
 	} catch (const ParsingError &error) {
 		status = true;
 	}
@@ -117,7 +119,7 @@ static void testCommandLine(void) {
 
 	status = false;
 	try {
-		parsing.commandLine("push int32");
+		parsing.commandLine("push int32", &core);
 	} catch (const ParsingError &error) {
 		status = true;
 	}
@@ -128,7 +130,7 @@ static void testCommandLine(void) {
 
 	status = false;
 	try {
-		parsing.commandLine("push lol(32)");
+		parsing.commandLine("push lol(32)", &core);
 	} catch (const ParsingError &error) {
 		status = true;
 	}
@@ -139,7 +141,7 @@ static void testCommandLine(void) {
 
 	status = false;
 	try {
-		parsing.commandLine("push int32(32a)");
+		parsing.commandLine("push int32(32a)", &core);
 	} catch (const ParsingError &error) {
 		status = true;
 	}
@@ -150,7 +152,7 @@ static void testCommandLine(void) {
 
 	status = false;
 	try {
-		parsing.commandLine("dump 44");
+		parsing.commandLine("dump 44", &core);
 	} catch (const ParsingError &error) {
 		status = true;
 	}
@@ -161,7 +163,7 @@ static void testCommandLine(void) {
 
 	status = false;
 	try {
-		parsing.commandLine("dump 44");
+		parsing.commandLine("dump 44", &core);
 	} catch (const ParsingError &error) {
 		status = true;
 	}
@@ -171,7 +173,7 @@ static void testCommandLine(void) {
 	}
 
 	try {
-		parsing.commandLine("push double(33);");
+		parsing.commandLine("push double(33);", &core);
 	} catch (const ParsingError &error) {
 		printError("commandLine method is catching an exception");
 	}

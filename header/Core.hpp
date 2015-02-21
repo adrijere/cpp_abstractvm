@@ -15,6 +15,8 @@
 # include "IOperand.hpp"
 # include "Error.hpp"
 
+typedef void (Core::*operandFunction)(IOperand *);
+
 class Core {
 	Memory _memory;
 
@@ -22,7 +24,10 @@ class Core {
 	Core() {};
 	~Core() {};
 
+	void execute();
+
 	Memory getMemory(void) const;
+	void pushMemoryInstruction(operandFunction, IOperand *);
 
 	void push(IOperand *);
 	void pop(IOperand * = 0);

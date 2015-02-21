@@ -9,6 +9,7 @@
 # define MEMORY_HPP_
 
 # include <iostream>
+# include <map>
 # include <stack>
 # include <queue>
 

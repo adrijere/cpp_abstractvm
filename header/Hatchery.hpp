@@ -8,13 +8,15 @@
 #ifndef HATCHERY_HPP_
 # define HATCHERY_HPP_
 
+# include <map>
+
 # include "Error.hpp"
 # include "IOperand.hpp"
 
 class Hatchery {
 
  private:
-	IOperand *(Hatchery::*arrayMethod[5])(const std::string &);
+ 	std::map<eOperandType, IOperand *(Hatchery::*)(const std::string &)> _arrayMethod;
 
 	IOperand *createInt8(const std::string &);
 	IOperand *createInt16(const std::string &);

@@ -16,12 +16,17 @@
 # include <fstream>
 # include <algorithm>
 # include <list>
+# include <map>
 
-# include	"Error.hpp"
+# include "Hatchery.hpp"
+# include "Core.hpp"
+# include "Error.hpp"
 
 class	Parsing {
 	std::list<std::pair<std::string, bool> >	_instructions;
-	std::list<std::string>	_values;
+	std::map<std::string, eOperandType>	_values;
+	std::map<std::string, operandFunction> _map;
+
 	unsigned int _line;
 	unsigned int _elements;
 	bool  _exit;
@@ -30,13 +35,12 @@ public:
 	Parsing();
 	~Parsing() {};
 
-	void getCommands(std::istream &);
-	void commandLine(const std::string &);
+	void getCommands(std::istream &, Core *);
+	void commandLine(const std::string &, Core *);
 	void checkElements(const std::string &);
 	void isNumber(const std::string &);
+	void createInstruction(const std::string &, const std::string &, const std::string &, Core *);
 
-	std::list<std::pair<std::string, bool> >	getInstructions(void) const;
-	std::list<std::string>	getValues(void) const;
 	std::string getErrorLine(const char * = "") const;
 
 	// void getGrammar(const char *);

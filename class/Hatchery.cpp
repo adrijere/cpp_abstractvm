@@ -2,22 +2,22 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 10:18:09
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 13:47:48
+* @Last Modified time: 2015-02-21 18:54:16
 */
 
 #include "Hatchery.hpp"
 
 Hatchery::Hatchery() {
-	this->arrayMethod[Int8] = &Hatchery::createInt8;
-	this->arrayMethod[Int16] = &Hatchery::createInt16;
-	this->arrayMethod[Int32] = &Hatchery::createInt32;
-	this->arrayMethod[Float] = &Hatchery::createFloat;
-	this->arrayMethod[Double] = &Hatchery::createDouble;
+	this->_arrayMethod[Int8] = &Hatchery::createInt8;
+	this->_arrayMethod[Int16] = &Hatchery::createInt16;
+	this->_arrayMethod[Int32] = &Hatchery::createInt32;
+	this->_arrayMethod[Float] = &Hatchery::createFloat;
+	this->_arrayMethod[Double] = &Hatchery::createDouble;
 }
 
 IOperand *Hatchery::createOperand(eOperandType type, const std::string &value) {
-	if (this->arrayMethod[type]) {
-		return (this->*arrayMethod[type])(value);
+	if (this->_arrayMethod.find(type) != this->_arrayMethod.end()) {
+		return (this->*_arrayMethod[type])(value);
 	} else {
 		throw HatcheryError("OperandType for array to member pointers undefined");
 	}
