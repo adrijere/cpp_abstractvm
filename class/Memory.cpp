@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-18 16:07:36
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 18:13:38
+* @Last Modified time: 2015-02-21 18:27:10
 */
 
 #include "Memory.hpp"
@@ -20,14 +20,10 @@ void Memory::popInstruction(void) {
 }
 
 void Memory::pushInstruction(operandFunction function, IOperand *operand) {
-	s_instructions structure;
-
-	structure.function = function;
-	structure.operand = operand;
-	this->_queue.push(structure);
+	this->_queue.push(std::make_pair(function, operand));
 }
 
-std::queue<s_instructions> Memory::getQueue(void) const {
+std::queue<std::pair<operandFunction, IOperand *> > Memory::getQueue(void) const {
 	return this->_queue;
 }
 

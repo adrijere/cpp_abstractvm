@@ -17,13 +17,8 @@
 class Core;
 typedef void (Core::*operandFunction)(IOperand *);
 
-struct s_instructions {
-	operandFunction function;
-	IOperand *operand;
-};
-
 class Memory {
-	std::queue<s_instructions> _queue;
+	std::queue<std::pair<operandFunction, IOperand *> > _queue;
 	std::stack<IOperand *> _stack;
 
  public:
@@ -36,7 +31,7 @@ class Memory {
 	void popInstruction();
 	void pushInstruction(operandFunction, IOperand *);
 
-	std::queue<s_instructions> getQueue(void) const;
+	std::queue<std::pair<operandFunction, IOperand *> > getQueue(void) const;
 	std::stack<IOperand *> getStack(void) const;
 };
 
