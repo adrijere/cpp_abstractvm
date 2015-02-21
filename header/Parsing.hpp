@@ -12,32 +12,37 @@
 # define PARSING_HPP_
 
 # include	<iostream>
-# include	<list>
-# include	<string>
+# include <sstream>
 # include	<fstream>
+# include <algorithm>
+# include <list>
 
 # include	"Error.hpp"
 
 class	Parsing
 {
-  std::list<std::string>	_instructions;
+  std::list<std::pair<std::string, bool> >	_instructions;
   std::list<std::string>	_values;
   std::string _separator;
+  unsigned int _line;
+  bool  _end;
 
 public:
-  Parsing() {};
+  Parsing();
   ~Parsing() {};
   
-  std::list<std::string>	getInstructions(void) const;
+  std::list<std::pair<std::string, bool> >	getInstructions(void) const;
   std::list<std::string>	getValues(void) const;
   std::string getSeparator(void) const;
 
-  void				addInstruction(std::string);
-  void				addValue(std::string);
-  void				parsingGrammar();
-  void				checkLine(std::string &);
+  void getCommands(const char *);
 
-  void getGrammar(const char *);
+  // void				addInstruction(std::string);
+  // void				addValue(std::string);
+  // void				parsingGrammar();
+  // void				checkLine(std::string &);
+
+  // void getGrammar(const char *);
 };
 
 #endif /* !PARSING_HPP_ */
