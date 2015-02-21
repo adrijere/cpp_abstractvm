@@ -35,6 +35,8 @@ public:
   void				addValue(std::string);
   void				parsingGrammar();
   void				checkLine(std::string &);
+
+  void getGrammar(void);
 };
 
 #endif /* !PARSING_HPP_ */

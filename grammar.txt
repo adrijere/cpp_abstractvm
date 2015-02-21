@@ -8,10 +8,10 @@
 S := [INSTR SEP]* #
 
 INSTR :=
-| push VALEUR
+| push VALUE
 | pop
 | dump
-| assert VALEUR
+| assert VALUE
 | add
 | sub
 | mul
@@ -20,7 +20,7 @@ INSTR :=
 | print
 | exit
 
-VALEUR :=
+VALUE :=
 | int8(N)
 | int16(N)
 | int32(N)

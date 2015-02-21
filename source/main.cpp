@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-12 09:59:22
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 22:18:27
+* @Last Modified time: 2015-02-21 11:06:20
 */
 
 #include "Parsing.hpp"
@@ -31,9 +31,9 @@ int main() {
 	map["print"] = &Core::print;
 
 	Hatchery hatchery;
-	IOperand *operand = hatchery.createOperand(Int8, "42");
+	// IOperand *operand = hatchery.createOperand(Int8, "42");
 
-	while (std::cin >> line) {
+	// while (std::cin >> line) {
 		// if (!word.empty()) {
 		// 	if (map[word] and word != "") {
 		// 		try {
@@ -46,7 +46,7 @@ int main() {
 		// 		std::cout << "Instruction non reconnue" << std::endl;
 		// 	}
 		// }
-	}
+	// }
 
     return 0;
 }
