@@ -30,7 +30,7 @@ Parsing::Parsing() {
 
 	this->_separator = "\n";
 	this->_line = 1;
-	this->_end = false;
+	this->_exit = false;
 }
 
 std::list<std::pair<std::string, bool> > Parsing::getInstructions(void) const {
@@ -38,49 +38,67 @@ std::list<std::pair<std::string, bool> > Parsing::getInstructions(void) const {
 }
 
 std::list<std::string>	Parsing::getValues(void) const {
-	return (this->_values);
+	return this->_values;
 }
 
 std::string Parsing::getSeparator(void) const {
-	return (this->_separator);
+	return this->_separator;
 }
 
 void Parsing::getCommands(const char *filename) {
 	std::ifstream file;
 	std::string line;
-	std::stringstream stream;
 
 	file.open(filename, std::ifstream::in);
 	if (file) {
 		while (getline(file, line)) {
 			if (line.size() != 0 and line.at(0) != ';') {
+				std::stringstream stream;
+				stream << "Line ";
+				stream << this->_line;
+				stream << ": Parsing Error";
 
 				if (line.find_first_of(';') != line.npos) {
 					line.erase(line.find_first_of(';'), line.npos);
 				}
 
-				std::istringstream newLine(line);
-				std::string instruction;
-				std::string value;
-				bool status = false;
+				if (line == "exit") {
+					this->_exit = true;
+					break;
+				} else {
+					std::istringstream newLine(line);
+					std::string instruction;
+					std::string type;
+					std::string value;
+					bool status = false;
 
-				newLine >> instruction;
-				newLine >> value;
+					newLine >> instruction;
+					newLine >> type;
 
-				if (!value.empty()) {
-					status = true;
-				}
+					if (!type.empty()) {
+						if (type.find('(') != type.npos and type.find(')') != type.npos) {
+							value = type.substr(type.find_first_of('(') + 1);
+							value = value.substr(0, value.find_last_of(')'));
+							type.erase(type.find_first_of('('), type.npos);
+							status = true;
+						} else {
+							throw ParsingError(stream.str());
+						}
+					}
 
-				// std::cout << "instr: " << instruction << " | val: " << value << std::endl;
-				if (std::find(this->_instructions.begin(), this->_instructions.end(), std::make_pair(instruction, status)) == this->_instructions.end()) {
-					stream << "Line ";
-					stream << this->_line;
-					stream << ": Parsing Error";
-					throw ParsingError(stream.str());
+					if (std::find(this->_instructions.begin(), this->_instructions.end(), std::make_pair(instruction, status)) == this->_instructions.end()) {
+						throw ParsingError(stream.str());
+					} else {
+						std::cout << "instr: " << instruction << "\t| type: " << type << "\t| value: " << value << std::endl;
+					}
 				}
 			}
 
 			this->_line++;
+		}
+
+		if (this->_exit == false) {
+			throw ParsingError("You must finish your commands file with exit instruction");
 		}
 	} else {
 		throw ParsingError("Commands file does not exists");

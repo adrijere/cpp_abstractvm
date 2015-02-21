@@ -25,7 +25,7 @@ class	Parsing
   std::list<std::string>	_values;
   std::string _separator;
   unsigned int _line;
-  bool  _end;
+  bool  _exit;
 
 public:
   Parsing();
