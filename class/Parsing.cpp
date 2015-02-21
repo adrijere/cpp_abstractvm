@@ -54,7 +54,25 @@ void Parsing::getCommands(const char *filename) {
 	if (file) {
 		while (getline(file, line)) {
 			if (line.size() != 0 and line.at(0) != ';') {
-				if (std::find(this->_instructions.begin(), this->_instructions.end(), std::make_pair(line, true)) == this->_instructions.end()) {
+
+				if (line.find_first_of(';') != line.npos) {
+					line.erase(line.find_first_of(';'), line.npos);
+				}
+
+				std::istringstream newLine(line);
+				std::string instruction;
+				std::string value;
+				bool status = false;
+
+				newLine >> instruction;
+				newLine >> value;
+
+				if (!value.empty()) {
+					status = true;
+				}
+
+				// std::cout << "instr: " << instruction << " | val: " << value << std::endl;
+				if (std::find(this->_instructions.begin(), this->_instructions.end(), std::make_pair(instruction, status)) == this->_instructions.end()) {
 					stream << "Line ";
 					stream << this->_line;
 					stream << ": Parsing Error";
