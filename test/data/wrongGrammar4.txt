@@ -1,0 +1,10 @@
+INTR :=
+| push
+| back
+| coucou
+| test
+VALUE =:
+| int8
+| int32
+
+SEP =: \n

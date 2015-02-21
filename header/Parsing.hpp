@@ -21,22 +21,23 @@
 class	Parsing
 {
   std::list<std::string>	_instructions;
-  std::list<std::string>	_value;
-  char				*_sep;
+  std::list<std::string>	_values;
+  std::string _separator;
 
 public:
   Parsing() {};
   ~Parsing() {};
   
-  std::list<std::string>	getInstruction(void) const;
-  std::list<std::string>	getValue(void) const;
-  char				*getSep(void) const;
+  std::list<std::string>	getInstructions(void) const;
+  std::list<std::string>	getValues(void) const;
+  std::string getSeparator(void) const;
+
   void				addInstruction(std::string);
   void				addValue(std::string);
   void				parsingGrammar();
   void				checkLine(std::string &);
 
-  void getGrammar(void);
+  void getGrammar(const char *);
 };
 
 #endif /* !PARSING_HPP_ */

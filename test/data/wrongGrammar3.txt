@@ -1,0 +1,11 @@
+INSTR =:
+| push
+| back
+| top
+| dump
+| coucou
+| Kafei
+
+VALUE =:
+
+SEP =: "\n"

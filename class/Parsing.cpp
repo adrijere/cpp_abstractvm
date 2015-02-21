@@ -10,19 +10,19 @@
 
 #include	"Parsing.hpp"
 
-std::list<std::string>	Parsing::getInstruction(void) const
+std::list<std::string>	Parsing::getInstructions(void) const
 {
   return (this->_instructions);
 }
 
-std::list<std::string>	Parsing::getValue(void) const 
+std::list<std::string>	Parsing::getValues(void) const 
 {
-  return (this->_value);
+  return (this->_values);
 }
 
-char			*Parsing::getSep(void) const
+std::string Parsing::getSeparator(void) const
 {
-  return (this->_sep);
+  return (this->_separator);
 }
 
 void			Parsing::addInstruction(std::string ins)
@@ -32,7 +32,7 @@ void			Parsing::addInstruction(std::string ins)
 
 void			Parsing::addValue(std::string value)
 {
-  this->_value.push_back(value);
+  this->_values.push_back(value);
 }
 
 void			Parsing::checkLine(std::string &ins)
@@ -63,30 +63,73 @@ void			Parsing::checkLine(std::string &ins)
 	}
 }
 
-void Parsing::getGrammar() {
+void Parsing::getGrammar(const char *filename) {
 	std::ifstream file;
 	std::string line;
 
-	file.open("grammar.txt", std::ifstream::in);
+	file.open(filename, std::ifstream::in);
 	if (file) {
 		while (getline(file, line)) {
 			if (line == "INSTR :=") {
 				while (getline(file, line) and line.size() != 0 and line.at(0) == '|') {
 					line.erase(0, 2);
-					std::cout << "instr: " << line << std::endl;
+					if (line.find(" VALUE") != line.npos) {
+						// PUT A BOOLEAN TO TRUE ?!!
+					} else {
+						// PUT A BOOLEAN TO FALSE ?!!
+					}
+
+					if (line.find_first_of(' ') != line.npos) {
+						line.erase(line.find_first_of(' '), line.npos);					
+					}
+
+					try {
+						this->addInstruction(line);					
+					} catch (const std::exception &error) {
+						throw ParsingError(error.what());
+					}
 				}
 			}
 
 			if (line == "VALUE :=") {
 				while (getline(file, line) and line.size() != 0 and line.at(0) == '|') {
 					line.erase(0, 2);
-					line.erase(line.find_first_of('('), line.size());
-					std::cout << "value: " << line << std::endl;
+					try {
+						this->addValue(line);					
+					} catch (const std::exception &error) {
+						throw ParsingError(error.what());
+					}
+				}
+			}
+
+			if (line.find("SEP := ") != line.npos) {
+				line.erase(0, 7);
+				if (line.find_first_of('"') != line.npos and line.find_last_of('"') != line.npos) {
+					line.erase(0, line.find_first_of('"') + 1);
+					line.erase(line.find_last_of('"'), line.npos);
+
+					if (line == "\\n") {
+						this->_separator = "\n";
+					} else {
+						this->_separator = line;
+					}
 				}
 			}
 		}
 	} else {
-		throw ParsingError("grammar.txt does not exists");
+		throw ParsingError("Grammar file does not exists");
+	}
+
+	if (this->_instructions.empty()) {
+		throw ParsingError("Instructions list is empty");
+	}
+
+	if (this->_values.empty()) {
+		throw ParsingError("Values list is empty");
+	}
+
+	if (this->_separator.empty()) {
+		throw ParsingError("Separator character is set to Null");
 	}
 }
 

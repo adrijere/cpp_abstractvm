@@ -1,0 +1,12 @@
+INSTR =:
+push
+back
+top
+dump
+
+VALUE =:
+int8
+int23
+int44
+
+SEP	=: "\n"
