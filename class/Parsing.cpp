@@ -21,6 +21,7 @@ Parsing::Parsing() {
 	this->_instructions.push_back(std::make_pair("div", false));
 	this->_instructions.push_back(std::make_pair("mod", false));
 	this->_instructions.push_back(std::make_pair("print", false));
+	this->_instructions.push_back(std::make_pair("exit", false));
 
 	this->_values.push_back("int8");
 	this->_values.push_back("int16");
@@ -29,16 +30,19 @@ Parsing::Parsing() {
 	this->_values.push_back("double");
 
 	this->_line = 1;
+	this->_elements = 0;
 	this->_exit = false;
 }
 
-void Parsing::getCommands(const char *filename) {
-	std::ifstream file;
+void Parsing::getCommands(std::istream &in) {
 	std::string line;
 
-	file.open(filename, std::ifstream::in);
-	if (file) {
-		while (getline(file, line)) {
+	if (in) {
+		while (getline(in, line)) {
+			if (in == std::cin and line.find(";;") != line.npos) {
+				break;
+			}
+
 			if (line.size() != 0 and line.at(0) != ';') {
 				if (line.find_first_of(';') != line.npos) {
 					line.erase(line.find_first_of(';'), line.npos);
@@ -46,9 +50,12 @@ void Parsing::getCommands(const char *filename) {
 
 				if (line == "exit") {
 					this->_exit = true;
-					break;
-				} else {
+				}
+
+				try {
 					this->commandLine(line);
+				} catch (const ParsingError &error) {
+					throw ParsingError(this->getErrorLine(error.what()));
 				}
 			}
 			this->_line++;
@@ -61,8 +68,8 @@ void Parsing::getCommands(const char *filename) {
 		throw ParsingError("Commands file does not exists");
 	}
 }
-
 void Parsing::commandLine(const std::string &line) {
+
 	std::istringstream word(line);
 	std::string instruction;
 	std::string type;
@@ -79,22 +86,62 @@ void Parsing::commandLine(const std::string &line) {
 			type.erase(type.find_first_of('('), type.npos);
 			status = true;
 		} else {
-			throw ParsingError(this->getErrorLine());
+			throw ParsingError("A value between () was expected");
 		}
 	}
 
 	if (std::find(this->_instructions.begin(), this->_instructions.end(), std::make_pair(instruction, status)) == this->_instructions.end()) {
-		throw ParsingError(this->getErrorLine());
+		throw ParsingError("Undefined instruction");
 	} else {
-		std::cout << "instr: " << instruction << "\t| type: " << type << "\t| value: " << value << std::endl;
+		if (!type.empty() and std::find(this->_values.begin(), this->_values.end(), type) == this->_values.end()) {
+			throw ParsingError("Undefined type");
+		} else {
+			try {
+				this->checkElements(instruction);
+			} catch (const ParsingError &error) {
+				throw ParsingError(error.what());
+			}
+
+			try {
+				this->isNumber(value);			
+			} catch (const ParsingError &error) {
+				throw ParsingError(error.what());
+			}
+
+			// std::cout << "instr: " << instruction << "\t| type: " << type << "\t| value: " << value << std::endl;
+		}
 	}
 }
 
-std::string Parsing::getErrorLine(void) const {
+void Parsing::checkElements(const std::string &instr) {
+	if (instr == "pop" and this->_elements == 0) {
+		throw ParsingError("Pop instruction on an empty list");
+	} else if ((instr == "add" or instr == "sub" or instr == "mul" or instr == "div" or instr == "mod") and this->_elements < 2) {
+		throw ParsingError("Calculate instruction on a list without more 2 elements");
+	} else if ((instr == "add" or instr == "sub" or instr == "mul" or instr == "div" or instr == "mod" or instr == "pop")) {
+		this->_elements--;
+	} else if (instr == "push") {
+		this->_elements++;
+	}
+}
+
+void Parsing::isNumber(const std::string &value) {
+	std::string::const_iterator it = value.begin();
+	while (it != value.end()) {
+		if (!std::isdigit(*it) and *it != '.') {
+			throw ParsingError("Value is not a number");
+		} else {
+			*it++;
+		}
+	}
+}
+
+std::string Parsing::getErrorLine(const char *specification) const {
 	std::stringstream stream;
 	stream << "Line ";
 	stream << this->_line;
-	stream << ": Parsing Error";
+	stream << ": ";
+	stream << specification;
 
 	return stream.str();
 }
@@ -106,73 +153,3 @@ std::list<std::pair<std::string, bool> > Parsing::getInstructions(void) const {
 std::list<std::string>	Parsing::getValues(void) const {
 	return this->_values;
 }
-
-// void Parsing::getGrammar(const char *filename = "grammar.txt") {
-// 	std::ifstream file;
-// 	std::string line;
-
-// 	file.open(filename, std::ifstream::in);
-// 	if (file) {
-// 		while (getline(file, line)) {
-// 			if (line == "INSTR :=") {
-// 				while (getline(file, line) and line.size() != 0 and line.at(0) == '|') {
-// 					line.erase(0, 2);
-// 					if (line.find(" VALUE") != line.npos) {
-// 						// PUT A BOOLEAN TO TRUE ?!!
-// 					} else {
-// 						// PUT A BOOLEAN TO FALSE ?!!
-// 					}
-
-// 					if (line.find_first_of(' ') != line.npos) {
-// 						line.erase(line.find_first_of(' '), line.npos);
-// 					}
-
-// 					try {
-// 						this->addInstruction(line);
-// 					} catch (const std::exception &error) {
-// 						throw ParsingError(error.what());
-// 					}
-// 				}
-// 			}
-
-// 			if (line == "VALUE :=") {
-// 				while (getline(file, line) and line.size() != 0 and line.at(0) == '|') {
-// 					line.erase(0, 2);
-// 					try {
-// 						this->addValue(line);
-// 					} catch (const std::exception &error) {
-// 						throw ParsingError(error.what());
-// 					}
-// 				}
-// 			}
-
-// 			if (line.find("SEP := ") != line.npos) {
-// 				line.erase(0, 7);
-// 				if (line.find_first_of('"') != line.npos and line.find_last_of('"') != line.npos) {
-// 					line.erase(0, line.find_first_of('"') + 1);
-// 					line.erase(line.find_last_of('"'), line.npos);
-
-// 					if (line == "\\n") {
-// 						this->_separator = "\n";
-// 					} else {
-// 						this->_separator = line;
-// 					}
-// 				}
-// 			}
-// 		}
-// 	} else {
-// 		throw ParsingError("Grammar file does not exists");
-// 	}
-
-// 	if (this->_instructions.empty()) {
-// 		throw ParsingError("Instructions list is empty");
-// 	}
-
-// 	if (this->_values.empty()) {
-// 		throw ParsingError("Values list is empty");
-// 	}
-
-// 	if (this->_separator.empty()) {
-// 		throw ParsingError("Separator character is set to Null");
-// 	}
-// }

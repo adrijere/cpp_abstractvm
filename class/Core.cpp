@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-18 18:41:36
+* @Last Modified time: 2015-02-21 17:44:54
 */
 
 #include "Core.hpp"
@@ -169,4 +169,10 @@ void Core::print(IOperand *operand) {
 	buffer >> value;
 	char ascii = static_cast<char>(value);
 	std::cout << ascii << std::endl;
+}
+
+void Core::exit(IOperand *operand) {
+	(void)operand;
+
+	exit(EXIT_SUCCESS);
 }

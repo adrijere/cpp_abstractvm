@@ -34,6 +34,7 @@ class Core {
 	void div(IOperand * = 0);
 	void mod(IOperand * = 0);
 	void print(IOperand * = 0);
+	void exit(IOperand * = 0);
 };
 
 #endif /* !CORE_HPP_ */

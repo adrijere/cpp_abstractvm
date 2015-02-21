@@ -23,18 +23,21 @@ class	Parsing {
 	std::list<std::pair<std::string, bool> >	_instructions;
 	std::list<std::string>	_values;
 	unsigned int _line;
+	unsigned int _elements;
 	bool  _exit;
 
 public:
 	Parsing();
 	~Parsing() {};
 
-	void getCommands(const char *);
+	void getCommands(std::istream &);
 	void commandLine(const std::string &);
+	void checkElements(const std::string &);
+	void isNumber(const std::string &);
 
 	std::list<std::pair<std::string, bool> >	getInstructions(void) const;
 	std::list<std::string>	getValues(void) const;
-	std::string getErrorLine(void) const;
+	std::string getErrorLine(const char * = "") const;
 
 	// void getGrammar(const char *);
 };
