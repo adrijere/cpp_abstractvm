@@ -11,38 +11,32 @@
 #ifndef PARSING_HPP_
 # define PARSING_HPP_
 
-# include	<iostream>
+# include <iostream>
 # include <sstream>
-# include	<fstream>
+# include <fstream>
 # include <algorithm>
 # include <list>
 
 # include	"Error.hpp"
 
-class	Parsing
-{
-  std::list<std::pair<std::string, bool> >	_instructions;
-  std::list<std::string>	_values;
-  std::string _separator;
-  unsigned int _line;
-  bool  _exit;
+class	Parsing {
+	std::list<std::pair<std::string, bool> >	_instructions;
+	std::list<std::string>	_values;
+	unsigned int _line;
+	bool  _exit;
 
 public:
-  Parsing();
-  ~Parsing() {};
-  
-  std::list<std::pair<std::string, bool> >	getInstructions(void) const;
-  std::list<std::string>	getValues(void) const;
-  std::string getSeparator(void) const;
+	Parsing();
+	~Parsing() {};
 
-  void getCommands(const char *);
+	void getCommands(const char *);
+	void commandLine(const std::string &);
 
-  // void				addInstruction(std::string);
-  // void				addValue(std::string);
-  // void				parsingGrammar();
-  // void				checkLine(std::string &);
+	std::list<std::pair<std::string, bool> >	getInstructions(void) const;
+	std::list<std::string>	getValues(void) const;
+	std::string getErrorLine(void) const;
 
-  // void getGrammar(const char *);
+	// void getGrammar(const char *);
 };
 
 #endif /* !PARSING_HPP_ */

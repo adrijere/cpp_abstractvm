@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Tue Feb 17 22:44:53 2015 Jérémy MATHON
-** Last update Fri Feb 20 23:18:17 2015 Jérémy MATHON
+** Last update Fri Feb 20 23:18:17 2015 Pierrick Gicquelais
 */
 
 #include	"Parsing.hpp"
@@ -28,21 +28,8 @@ Parsing::Parsing() {
 	this->_values.push_back("float");
 	this->_values.push_back("double");
 
-	this->_separator = "\n";
 	this->_line = 1;
 	this->_exit = false;
-}
-
-std::list<std::pair<std::string, bool> > Parsing::getInstructions(void) const {
-	return this->_instructions;
-}
-
-std::list<std::string>	Parsing::getValues(void) const {
-	return this->_values;
-}
-
-std::string Parsing::getSeparator(void) const {
-	return this->_separator;
 }
 
 void Parsing::getCommands(const char *filename) {
@@ -53,11 +40,6 @@ void Parsing::getCommands(const char *filename) {
 	if (file) {
 		while (getline(file, line)) {
 			if (line.size() != 0 and line.at(0) != ';') {
-				std::stringstream stream;
-				stream << "Line ";
-				stream << this->_line;
-				stream << ": Parsing Error";
-
 				if (line.find_first_of(';') != line.npos) {
 					line.erase(line.find_first_of(';'), line.npos);
 				}
@@ -66,34 +48,9 @@ void Parsing::getCommands(const char *filename) {
 					this->_exit = true;
 					break;
 				} else {
-					std::istringstream newLine(line);
-					std::string instruction;
-					std::string type;
-					std::string value;
-					bool status = false;
-
-					newLine >> instruction;
-					newLine >> type;
-
-					if (!type.empty()) {
-						if (type.find('(') != type.npos and type.find(')') != type.npos) {
-							value = type.substr(type.find_first_of('(') + 1);
-							value = value.substr(0, value.find_last_of(')'));
-							type.erase(type.find_first_of('('), type.npos);
-							status = true;
-						} else {
-							throw ParsingError(stream.str());
-						}
-					}
-
-					if (std::find(this->_instructions.begin(), this->_instructions.end(), std::make_pair(instruction, status)) == this->_instructions.end()) {
-						throw ParsingError(stream.str());
-					} else {
-						std::cout << "instr: " << instruction << "\t| type: " << type << "\t| value: " << value << std::endl;
-					}
+					this->commandLine(line);
 				}
 			}
-
 			this->_line++;
 		}
 
@@ -102,46 +59,53 @@ void Parsing::getCommands(const char *filename) {
 		}
 	} else {
 		throw ParsingError("Commands file does not exists");
-	}	
+	}
 }
 
-// void			Parsing::addInstruction(std::string ins)
-// {
-//   this->_instructions.push_back(ins);
-// }
+void Parsing::commandLine(const std::string &line) {
+	std::istringstream word(line);
+	std::string instruction;
+	std::string type;
+	std::string value;
+	bool status = false;
 
-// void			Parsing::addValue(std::string value)
-// {
-//   this->_values.push_back(value);
-// }
+	word >> instruction;
+	word >> type;
 
-// void			Parsing::checkLine(std::string &ins)
-// {
-//   size_t		cpt;
-//   char			*tmp;
-//   int			i;
+	if (!type.empty()) {
+		if (type.find('(') != type.npos and type.find(')') != type.npos) {
+			value = type.substr(type.find_first_of('(') + 1);
+			value = value.substr(0, value.find_last_of(')'));
+			type.erase(type.find_first_of('('), type.npos);
+			status = true;
+		} else {
+			throw ParsingError(this->getErrorLine());
+		}
+	}
 
-//   cpt = 0;
-//   tmp = NULL;
-//   if (ins[0] != '|' or ins.empty())
-// 	throw ParsingError("Wrong instruction.");
-//   ins.erase(0, 2);
-//   cpt = ins.find("VALEUR");
-//   if (cpt != std::string::npos)
-// 	{
-// 	  i = ins.copy(tmp, cpt, 0);
-// 	  tmp[i] = '\0';
-// 	  ins.erase(0, cpt);
-// 	  addInstruction(tmp);
-// 	  addValue(ins);
-// 	  ins.clear();
-// 	}
-//   else
-// 	{
-// 	  addInstruction(ins);
-// 	  addValue("-1");
-// 	}
-// }
+	if (std::find(this->_instructions.begin(), this->_instructions.end(), std::make_pair(instruction, status)) == this->_instructions.end()) {
+		throw ParsingError(this->getErrorLine());
+	} else {
+		std::cout << "instr: " << instruction << "\t| type: " << type << "\t| value: " << value << std::endl;
+	}
+}
+
+std::string Parsing::getErrorLine(void) const {
+	std::stringstream stream;
+	stream << "Line ";
+	stream << this->_line;
+	stream << ": Parsing Error";
+
+	return stream.str();
+}
+
+std::list<std::pair<std::string, bool> > Parsing::getInstructions(void) const {
+	return this->_instructions;
+}
+
+std::list<std::string>	Parsing::getValues(void) const {
+	return this->_values;
+}
 
 // void Parsing::getGrammar(const char *filename = "grammar.txt") {
 // 	std::ifstream file;
@@ -210,30 +174,5 @@ void Parsing::getCommands(const char *filename) {
 
 // 	if (this->_separator.empty()) {
 // 		throw ParsingError("Separator character is set to Null");
-// 	}
-// }
-
-// void			Parsing::parsingGrammar()
-// {
-//   std::ifstream		file;
-//   std::string		ins;
-
-//   file.open("grammar.txt", std::ifstream::in);
-//   if (file.fail())
-// 	throw ParsingError("Can't open grammar file");
-//   while (getline(file, ins))
-// 	{
-// 	  if (ins == "INSTR :=")
-// 		{
-// 		  while (ins.compare("\n") != 0)
-// 			{
-// 			  std::getline(file, ins);
-// 			try {
-// 			  checkLine(ins);            
-// 			} catch (const ParsingError &error) {
-// 			  throw ParsingError(error.what());
-// 			}
-// 			}
-// 		 }
 // 	}
 // }
