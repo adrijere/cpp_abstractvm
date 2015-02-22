@@ -80,8 +80,8 @@ void Parsing::getCommands(std::istream &in, Core *core) {
 		throw ParsingError("Commands file does not exists");
 	}
 }
-void Parsing::commandLine(const std::string &line, Core *core) {
 
+void Parsing::commandLine(const std::string &line, Core *core) {
 	std::istringstream word(line);
 	std::string instruction;
 	std::string type;

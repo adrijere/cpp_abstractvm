@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-21 20:06:54
+* @Last Modified time: 2015-02-22 12:10:52
 */
 
 #include "Core.hpp"
@@ -13,7 +13,7 @@ void Core::execute(void) {
 		try {
 			(this->*this->_memory.getQueue().front().first)(this->_memory.getQueue().front().second);
 			this->_memory.popInstruction();
-		} catch (const CoreError &error) {
+		} catch (const std::exception &error) {
 			throw CoreError(error.what());
 			break;
 		}
@@ -64,7 +64,8 @@ void Core::dump(IOperand *operand) {
 }
 
 void Core::assert(IOperand *operand) {
-	if (this->_memory.getStack().empty() or _memory.getStack().top()->getType() != operand->getType()) {
+	if (this->_memory.getStack().empty() or this->_memory.getStack().top()->getType() != operand->getType() or 
+		this->_memory.getStack().top()->toString() != operand->toString()) {
 		throw CoreError("Assert with a wrong operand type on the last element");
 	}
 }
@@ -174,11 +175,11 @@ void Core::mod(IOperand *operand) {
 
 void Core::print(IOperand *operand) {
 	Hatchery hatchery;
-	IOperand *newOperand = hatchery.createOperand(Int8, "Kafei"); 
+	IOperand *newOperand = hatchery.createOperand(Int8, this->_memory.getStack().top()->toString());
 
 	(void)operand;
 	try {
-		this->assert(newOperand);	
+		this->assert(newOperand);
 	} catch (const OperandError &error) {
 		throw CoreError("The last element on the stack is not an Int8");
 	}
