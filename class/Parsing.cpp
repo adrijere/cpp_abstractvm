@@ -140,7 +140,7 @@ void Parsing::checkElements(const std::string &instr) {
 void Parsing::isNumber(const std::string &value) {
 	std::string::const_iterator it = value.begin();
 	while (it != value.end()) {
-		if (!std::isdigit(*it) and *it != '.') {
+		if (!std::isdigit(*it) and *it != '.' and *it != '-') {
 			throw ParsingError("Value is not a number");
 		} else {
 			*it++;
