@@ -11,6 +11,7 @@
 # include <map>
 # include <limits>
 # include <stdint.h>
+# include <cfloat>
 
 # include "Error.hpp"
 # include "IOperand.hpp"

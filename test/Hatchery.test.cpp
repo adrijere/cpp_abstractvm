@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 12:21:51
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-23 15:37:01
+* @Last Modified time: 2015-02-23 17:11:07
 */
 
 #include "UnitTests.hpp"
@@ -163,35 +163,7 @@ void testCreateInt32(void) {
 void testCreateFloat(void) {
 	Hatchery hatchery;
 	std::ostringstream buffer;
-	bool status = false;
 
-	buffer << std::numeric_limits<float>::min();
-	try {
-		hatchery.createOperand(Float, buffer.str());
-	} catch (const HatcheryError &error) {
-		status = true;
-	}
-
-	if (UnitTests::isFalse(status)) {
-		printError("createFloat method is not catching an exception as it ougth to be");
-	}
-
-	buffer.str("");
-	buffer.clear();
-	buffer << std::numeric_limits<float>::max();
-	status = false;
-	try {
-		hatchery.createOperand(Float, buffer.str());
-	} catch (const HatcheryError &error) {
-		status = true;
-	}
-
-	if (UnitTests::isFalse(status)) {
-		printError("createFloat method is not catching an exception as it ougth to be");
-	}
-
-	buffer.str("");
-	buffer.clear();
 	buffer << INT32_MAX;
 	try {
 		hatchery.createOperand(Float, buffer.str());
@@ -201,7 +173,7 @@ void testCreateFloat(void) {
 
 	buffer.str("");
 	buffer.clear();
-	buffer << 0;
+	buffer << 0.1;
 	try {
 		hatchery.createOperand(Double, buffer.str());
 	} catch (const HatcheryError &error) {
@@ -212,45 +184,17 @@ void testCreateFloat(void) {
 void testCreateDouble(void) {
 	Hatchery hatchery;
 	std::ostringstream buffer;
-	bool status = false;
 
-	buffer << std::numeric_limits<double>::min();
-	try {
-		hatchery.createOperand(Double, buffer.str());
-	} catch (const HatcheryError &error) {
-		status = true;
-	}
-
-	if (UnitTests::isFalse(status)) {
-		printError("createDouble method is not catching an exception as it ougth to be");
-	}
-
-	buffer.str("");
-	buffer.clear();
-	buffer << std::numeric_limits<double>::max();
-	status = false;
-	try {
-		hatchery.createOperand(Double, buffer.str());
-	} catch (const HatcheryError &error) {
-		status = true;
-	}
-
-	if (UnitTests::isFalse(status)) {
-		printError("createDouble method is not catching an exception as it ougth to be");
-	}
-
-	buffer.str("");
-	buffer.clear();
 	buffer << std::numeric_limits<float>::max();
 	try {
-		hatchery.createOperand(Double, buffer.str());
+		hatchery.createOperand(Float, buffer.str());
 	} catch (const HatcheryError &error) {
-		printError("createDouble is catching an exception");
+		printError("createFloat is catching an exception");
 	}
 
 	buffer.str("");
 	buffer.clear();
-	buffer << 0;
+	buffer << 0.1;
 	try {
 		hatchery.createOperand(Double, buffer.str());
 	} catch (const HatcheryError &error) {

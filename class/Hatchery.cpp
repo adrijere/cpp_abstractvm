@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 10:18:09
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-23 15:37:23
+* @Last Modified time: 2015-02-23 17:09:06
 */
 
 #include "Hatchery.hpp"
@@ -70,7 +70,7 @@ IOperand *Hatchery::createFloat(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	if (convertedValue <= std::numeric_limits<float>::min()) {
+	if (convertedValue <= -(std::numeric_limits<float>::max())) {
 		throw HatcheryError("Underflow value for float");
 	} else if (convertedValue >= std::numeric_limits<float>::max()) {
 		throw HatcheryError("Overflow value for float");
@@ -84,7 +84,7 @@ IOperand *Hatchery::createDouble(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	if (convertedValue <= std::numeric_limits<double>::min()) {
+	if (convertedValue <= -(std::numeric_limits<double>::max())) {
 		throw HatcheryError("Underflow value for double");
 	} else if (convertedValue >= std::numeric_limits<double>::max()) {
 		throw HatcheryError("Overflow value for double");
