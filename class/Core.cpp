@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-22 12:10:52
+* @Last Modified time: 2015-02-23 15:04:20
 */
 
 #include "Core.hpp"
@@ -83,7 +83,6 @@ void Core::add(IOperand *operand) {
 		try {
 			this->push(*firstOperand + *secondOperand);
 		} catch (const OperandError &error) {
-			this->pop();
 			throw CoreError("Add result is lower than 2");
 		}
 	}
@@ -102,7 +101,6 @@ void Core::sub(IOperand *operand) {
 		try {
 			this->push(*firstOperand - *secondOperand);
 		} catch (const OperandError &error) {
-			this->pop();
 			throw CoreError("Sub result is lower than 2");
 		}
 	}
@@ -121,7 +119,6 @@ void Core::mul(IOperand *operand) {
 		try {
 			this->push(*firstOperand * (*secondOperand));
 		} catch (const OperandError &error) {
-			this->pop();
 			throw CoreError("Mul result is lower than 2");
 		}
 	}
@@ -143,7 +140,6 @@ void Core::div(IOperand *operand) {
 			try {
 				this->push(*firstOperand / *secondOperand);
 			} catch (const OperandError &error) {
-				this->pop();
 				throw CoreError("Div result is lower than 2");
 			}
 		}
@@ -166,7 +162,6 @@ void Core::mod(IOperand *operand) {
 			try {
 				this->push(*firstOperand % *secondOperand);
 			} catch (const OperandError &error) {
-				this->pop();
 				throw CoreError("Mod result is lower than 2");
 			}
 		}

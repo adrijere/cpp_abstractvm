@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:23:08
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-20 15:30:30
+* @Last Modified time: 2015-02-23 15:03:44
 */
 
 #include "UnitTests.hpp"
@@ -38,7 +38,7 @@ void testPush(void) {
 	Hatchery hatchery;
 	IOperand *firstOperand = hatchery.createOperand(Int8, "8");
 	IOperand *secondOperand = hatchery.createOperand(Double, "42.85");
-	IOperand *thirdOperand = hatchery.createOperand(Int16, "42.52");
+	IOperand *thirdOperand = hatchery.createOperand(Int16, "42.50");
 
 	try {
 		core.push(firstOperand);
