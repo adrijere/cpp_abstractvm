@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 10:18:09
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-23 09:20:57
+* @Last Modified time: 2015-02-23 09:25:47
 */
 
 #include "Hatchery.hpp"
@@ -70,7 +70,13 @@ IOperand *Hatchery::createFloat(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	return new Operand<float>(convertedValue, Float, PLUS_ACCURATE);
+	if (convertedValue < std::numeric_limits<float>::min()) {
+		throw HatcheryError("Underflow value for float");
+	} else if (convertedValue > std::numeric_limits<float>::max()) {
+		throw HatcheryError("Overflow value for float");
+	} else {
+		return new Operand<float>(convertedValue, Float, PLUS_ACCURATE);	
+	}
 }
 
 IOperand *Hatchery::createDouble(const std::string &value) {
@@ -78,5 +84,11 @@ IOperand *Hatchery::createDouble(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	return new Operand<double>(convertedValue, Double, MORE_ACCURATE);
+	if (convertedValue < std::numeric_limits<double>::min()) {
+		throw HatcheryError("Underflow value for double");
+	} else if (convertedValue > std::numeric_limits<double>::max()) {
+		throw HatcheryError("Overflow value for double");
+	} else {
+		return new Operand<double>(convertedValue, Double, MORE_ACCURATE);
+	}
 }

@@ -2,13 +2,11 @@
 * @Author: gicque_p
 * @Date:   2015-02-12 09:59:22
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-23 09:17:20
+* @Last Modified time: 2015-02-23 09:24:36
 */
 
 #include "Parsing.hpp"
 #include "Core.hpp"
-
-#include <stdint.h>
 
 int main(int argc, char **argv) {
 	Parsing parsing;
