@@ -9,6 +9,7 @@
 # define HATCHERY_HPP_
 
 # include <map>
+# include <stdint.h>
 
 # include "Error.hpp"
 # include "IOperand.hpp"

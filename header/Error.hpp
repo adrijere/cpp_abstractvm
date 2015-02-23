@@ -10,17 +10,6 @@
 
 # include <iostream>
 
-class Error : public std::exception {
-	std::string _message;
-
- public:
-	Error(std::string const &message);
-	~Error() throw() {};
-
-	const char *what() const throw();
-
-};
-
 class HatcheryError : public std::exception {
 	std::string _message;
 

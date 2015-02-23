@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 10:18:09
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-21 20:52:23
+* @Last Modified time: 2015-02-23 09:20:57
 */
 
 #include "Hatchery.hpp"
@@ -28,7 +28,13 @@ IOperand *Hatchery::createInt8(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	return new Operand<short>(convertedValue, Int8, LESS_ACCURATE);
+	if (convertedValue < INT8_MIN) {
+		throw HatcheryError("Underflow value for int8");
+	} else if (convertedValue > INT8_MAX) {
+		throw HatcheryError("Overflow value for int8");
+	} else {
+		return new Operand<short>(convertedValue, Int8, LESS_ACCURATE);	
+	}
 }
 
 IOperand *Hatchery::createInt16(const std::string &value) {
@@ -36,7 +42,13 @@ IOperand *Hatchery::createInt16(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	return new Operand<int16_t>(convertedValue, Int16, MINUS_ACCURATE);
+	if (convertedValue < INT16_MIN) {
+		throw HatcheryError("Underflow value for int16");
+	} else if (convertedValue > INT16_MIN) {
+		throw HatcheryError("Overflow value for int16");
+	} else {
+		return new Operand<int16_t>(convertedValue, Int16, MINUS_ACCURATE);	
+	}
 }
 
 IOperand *Hatchery::createInt32(const std::string &value) {
@@ -44,7 +56,13 @@ IOperand *Hatchery::createInt32(const std::string &value) {
 	std::istringstream buffer(value);
 
 	buffer >> convertedValue;
-	return new Operand<int32_t>(convertedValue, Int32, ACCURATE);
+	if (convertedValue < INT32_MIN) {
+		throw HatcheryError("Underflow value for int32");
+	} else if (convertedValue > INT32_MAX) {
+		throw HatcheryError("Overflow value for int32");
+	} else {
+		return new Operand<int32_t>(convertedValue, Int32, ACCURATE);	
+	}
 }
 
 IOperand *Hatchery::createFloat(const std::string &value) {
