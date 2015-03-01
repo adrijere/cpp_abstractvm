@@ -115,7 +115,7 @@ void Parsing::commandLine(const std::string &line, Core *core) {
 			}
 
 			try {
-				this->isNumber(value);			
+				this->isNumber(value);
 			} catch (const ParsingError &error) {
 				throw ParsingError(error.what());
 			}

@@ -2,7 +2,7 @@
 * @Author: gicque_p
 * @Date:   2015-02-13 14:22:30
 * @Last Modified by:   gicque_p
-* @Last Modified time: 2015-02-23 15:04:20
+* @Last Modified time: 2015-02-24 11:38:50
 */
 
 #include "Core.hpp"
@@ -190,5 +190,5 @@ void Core::print(IOperand *operand) {
 
 void Core::exit(IOperand *operand) {
 	(void)operand;
-	throw CoreError("End of programm");
+	throw CoreError("End of programm.");
 }
